@@ -1,3 +1,3 @@
-# Alvorecer dourado (Desenvolvimento de software)
+# Alvorecer Dourado (Desenvolvimento de Software)
 
-Esse repositorio tem o objetivo de documentar o trabalho prposto na materia de desenvolvimento de software no 2 semestre de 2023.
+Esse repositório tem o objetivo de documentar o trabalho proposto na matéria de desenvolvimento de software no 2o semestre de 2023.
