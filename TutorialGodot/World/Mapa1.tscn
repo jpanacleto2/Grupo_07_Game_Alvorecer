@@ -1,12 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
+[ext_resource path="res://World/Bush.png" type="Texture" id=3]
 
 [node name="Node2D" type="Node2D"]
 
+[node name="Bush" type="Sprite" parent="."]
+position = Vector2( 27, 29 )
+texture = ExtResource( 3 )
+
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-position = Vector2( 143, 91 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
