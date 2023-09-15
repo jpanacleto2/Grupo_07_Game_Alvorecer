@@ -23,9 +23,13 @@ func _physics_process(delta):
 	if input_vector != Vector2.ZERO:
 		if input_vector.x > 0:
 			animationPlayer.play("RunRight")
-		else:
+		elif input_vector.x < 0:
 			animationPlayer.play("RunLeft")
-			
+		
+		if input_vector.y > 0:
+			animationPlayer.play("RunDown")
+		elif input_vector.y < 0:
+			animationPlayer.play("RunUp")
 		
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 	else:
