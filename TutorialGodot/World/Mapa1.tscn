@@ -1,10 +1,11 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Bush.tscn" type="PackedScene" id=2]
 [ext_resource path="res://World/DirtTileset.png" type="Texture" id=3]
 [ext_resource path="res://World/GrassBackground.png" type="Texture" id=4]
 [ext_resource path="res://World/CliffTileset.png" type="Texture" id=5]
+[ext_resource path="res://World/Grass.tscn" type="PackedScene" id=6]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -483,7 +484,8 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 [node name="World" type="Node2D"]
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 160, 90 )
+position = Vector2( 160, 96 )
+scale = Vector2( 1, 1.01042 )
 texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 320, 192 )
@@ -518,3 +520,21 @@ position = Vector2( 58, 116 )
 
 [node name="Bush4" parent="YSort/Arbustos" instance=ExtResource( 2 )]
 position = Vector2( 186, 157 )
+
+[node name="Grass" parent="." instance=ExtResource( 6 )]
+position = Vector2( 120, 120 )
+
+[node name="Grass2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 280, 120 )
+
+[node name="Grass3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 281, 106 )
+
+[node name="Grass4" parent="." instance=ExtResource( 6 )]
+position = Vector2( 121, 105 )
+
+[node name="Grass5" parent="." instance=ExtResource( 6 )]
+position = Vector2( 248, 117 )
+
+[node name="Grass6" parent="." instance=ExtResource( 6 )]
+position = Vector2( 201, 120 )

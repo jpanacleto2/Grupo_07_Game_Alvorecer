@@ -15,7 +15,7 @@ var velocity = Vector2.ZERO
 
 
 #variável de acesso para animação de correr para os lados
-onready var animationPlayer = $AnimationPlaye
+onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 
@@ -23,7 +23,7 @@ func _ready():
 	animationTree.active = true
 	
 #"main"
-func _physics_process(delta):
+func _process(delta):
 	
 	match state:
 		MOVE:
@@ -52,16 +52,16 @@ func move_state(delta):
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 		
 	else:
-		animationState.travel("Idle")
 		# Quando o jogador não estiver pressionando as teclas, ele irá desacelerar
+		animationState.travel("Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-		
+	
+	
 	velocity = move_and_slide(velocity)
 	
 	if Input.is_action_just_pressed("Attack"):
 		state = ATTACK
 	
-
 func attack_state(delta):
 	velocity = Vector2.ZERO
 	animationState.travel("Attack")

@@ -305,25 +305,23 @@ blend_mode = 1
 animation = "IdleUp"
 
 [sub_resource type="AnimationNodeAnimation" id=35]
-animation = "IdleDown"
+animation = "IdleRight"
 
 [sub_resource type="AnimationNodeAnimation" id=36]
-animation = "IdleLeft"
+animation = "IdleDown"
 
 [sub_resource type="AnimationNodeAnimation" id=37]
-animation = "IdleRight"
+animation = "IdleLeft"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id=38]
 blend_point_0/node = SubResource( 34 )
-blend_point_0/pos = Vector2( 0, -1.1 )
+blend_point_0/pos = Vector2( 0, -1 )
 blend_point_1/node = SubResource( 35 )
-blend_point_1/pos = Vector2( 0, 1.1 )
+blend_point_1/pos = Vector2( 1, 0 )
 blend_point_2/node = SubResource( 36 )
-blend_point_2/pos = Vector2( -1, 0 )
+blend_point_2/pos = Vector2( 0, 1 )
 blend_point_3/node = SubResource( 37 )
-blend_point_3/pos = Vector2( 1, 0 )
-min_space = Vector2( -1, -1.1 )
-max_space = Vector2( 1, 1.1 )
+blend_point_3/pos = Vector2( -1, 0 )
 blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id=18]
@@ -363,12 +361,12 @@ blend_mode = 1
 states/Attack/node = SubResource( 33 )
 states/Attack/position = Vector2( 573, 248 )
 states/Idle/node = SubResource( 38 )
-states/Idle/position = Vector2( 573, 160 )
+states/Idle/position = Vector2( 584, 157 )
 states/Run/node = SubResource( 22 )
 states/Run/position = Vector2( 802, 167 )
-transitions = [ "Attack", "Idle", SubResource( 39 ), "Idle", "Attack", SubResource( 40 ), "Idle", "Run", SubResource( 41 ), "Run", "Idle", SubResource( 42 ) ]
+transitions = [ "Idle", "Attack", SubResource( 39 ), "Attack", "Idle", SubResource( 40 ), "Idle", "Run", SubResource( 41 ), "Run", "Idle", SubResource( 42 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -1, 78 )
+graph_offset = Vector2( 4, 102 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=17]
 
@@ -407,7 +405,8 @@ anims/RunUp = SubResource( 4 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 16 )
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/playback = SubResource( 17 )
 parameters/Attack/blend_position = Vector2( 0, 0 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
-parameters/Run/blend_position = Vector2( 0.207607, 0.0568966 )
+parameters/Run/blend_position = Vector2( 0.248485, -0.319099 )
