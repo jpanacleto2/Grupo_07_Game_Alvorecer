@@ -1,12 +1,10 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Bush.tscn" type="PackedScene" id=2]
 [ext_resource path="res://World/DirtTileset.png" type="Texture" id=3]
 [ext_resource path="res://World/GrassBackground.png" type="Texture" id=4]
 [ext_resource path="res://World/CliffTileset.png" type="Texture" id=5]
-[ext_resource path="res://World/Grass.png" type="Texture" id=6]
-[ext_resource path="res://World/Grama.gd" type="Script" id=7]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -485,8 +483,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 [node name="World" type="Node2D"]
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 160, 96 )
-scale = Vector2( 1, 1.01042 )
+position = Vector2( 160, 90 )
 texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 320, 192 )
@@ -521,72 +518,3 @@ position = Vector2( 58, 116 )
 
 [node name="Bush4" parent="YSort/Arbustos" instance=ExtResource( 2 )]
 position = Vector2( 186, 157 )
-
-[node name="Grama" type="YSort" parent="YSort"]
-script = ExtResource( 7 )
-
-[node name="Grass" type="Sprite" parent="YSort/Grama"]
-position = Vector2( 119, 120 )
-texture = ExtResource( 6 )
-
-[node name="Grass2" type="Sprite" parent="YSort/Grama"]
-position = Vector2( 99, 120 )
-texture = ExtResource( 6 )
-
-[node name="Grass3" type="Sprite" parent="YSort/Grama"]
-position = Vector2( 81, 120 )
-texture = ExtResource( 6 )
-
-[node name="Grass5" type="Sprite" parent="YSort/Grama"]
-position = Vector2( 168, 105 )
-texture = ExtResource( 6 )
-
-[node name="Grass6" type="Sprite" parent="YSort/Grama"]
-position = Vector2( 280, 104 )
-texture = ExtResource( 6 )
-
-[node name="Grass7" type="Sprite" parent="YSort/Grama"]
-position = Vector2( 280, 120 )
-texture = ExtResource( 6 )
-
-[node name="Grass8" type="Sprite" parent="YSort/Grama"]
-position = Vector2( 186, 121 )
-texture = ExtResource( 6 )
-
-[node name="Grass9" type="Sprite" parent="YSort/Grama"]
-position = Vector2( 97, 56 )
-texture = ExtResource( 6 )
-
-[node name="Grass4" type="Sprite" parent="YSort/Grama"]
-position = Vector2( 168, 121 )
-texture = ExtResource( 6 )
-
-[node name="Grass10" type="Sprite" parent="YSort/Grama"]
-position = Vector2( 281, 40 )
-scale = Vector2( 1, 1.01042 )
-texture = ExtResource( 6 )
-
-[node name="Grass11" type="Sprite" parent="YSort/Grama"]
-position = Vector2( 280, 57 )
-scale = Vector2( 1, 1.01042 )
-texture = ExtResource( 6 )
-
-[node name="Grass12" type="Sprite" parent="YSort/Grama"]
-position = Vector2( 119, 56 )
-scale = Vector2( 1, 1.01042 )
-texture = ExtResource( 6 )
-
-[node name="Grass13" type="Sprite" parent="YSort/Grama"]
-position = Vector2( 264, 40 )
-scale = Vector2( 1, 1.01042 )
-texture = ExtResource( 6 )
-
-[node name="Grass14" type="Sprite" parent="YSort/Grama"]
-position = Vector2( 263, 121 )
-scale = Vector2( 1, 1.01042 )
-texture = ExtResource( 6 )
-
-[node name="Grass15" type="Sprite" parent="YSort/Grama"]
-position = Vector2( 74, 56 )
-scale = Vector2( 1, 1.01042 )
-texture = ExtResource( 6 )
