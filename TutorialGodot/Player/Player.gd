@@ -15,7 +15,7 @@ var velocity = Vector2.ZERO
 
 
 #variável de acesso para animação de correr para os lados
-onready var animationPlayer = $AnimationPlaye
+onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 
@@ -23,7 +23,7 @@ func _ready():
 	animationTree.active = true
 	
 #"main"
-func _physics_process(delta):
+func _process(delta):
 	
 	match state:
 		MOVE:
