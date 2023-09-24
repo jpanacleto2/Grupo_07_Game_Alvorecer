@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Bush.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://World/GrassBackground.png" type="Texture" id=4]
 [ext_resource path="res://World/CliffTileset.png" type="Texture" id=5]
 [ext_resource path="res://World/Grass.tscn" type="PackedScene" id=6]
+[ext_resource path="res://World/Grama.tscn" type="PackedScene" id=7]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -506,6 +507,9 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 2, 8, 0, 196608, 9, 0, 7, 65536, 0, 131
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 143, 67 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Arbustos" type="YSort" parent="YSort"]
 
@@ -521,12 +525,6 @@ position = Vector2( 58, 116 )
 [node name="Bush4" parent="YSort/Arbustos" instance=ExtResource( 2 )]
 position = Vector2( 186, 157 )
 
-[node name="Grass" parent="." instance=ExtResource( 6 )]
-position = Vector2( 120, 120 )
-
-[node name="Grass2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 280, 120 )
-
 [node name="Grass3" parent="." instance=ExtResource( 6 )]
 position = Vector2( 281, 106 )
 
@@ -538,3 +536,6 @@ position = Vector2( 248, 117 )
 
 [node name="Grass6" parent="." instance=ExtResource( 6 )]
 position = Vector2( 201, 120 )
+
+[node name="Grama" parent="." instance=ExtResource( 7 )]
+position = Vector2( 113, 49 )
