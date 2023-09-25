@@ -5,7 +5,7 @@
 [ext_resource path="res://World/DirtTileset.png" type="Texture" id=3]
 [ext_resource path="res://World/GrassBackground.png" type="Texture" id=4]
 [ext_resource path="res://World/CliffTileset.png" type="Texture" id=5]
-[ext_resource path="res://World/Grass.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Enemies/Bat.tscn" type="PackedScene" id=6]
 [ext_resource path="res://World/Grama.tscn" type="PackedScene" id=7]
 
 [sub_resource type="TileSet" id=1]
@@ -500,6 +500,8 @@ tile_data = PoolIntArray( 11, 0, 0, 12, 0, 2, 65546, 0, 0, 65547, 0, 131078, 655
 [node name="DirtCliffTileMap" type="TileMap" parent="."]
 tile_set = SubResource( 2 )
 cell_size = Vector2( 32, 32 )
+collision_layer = 9
+collision_mask = 9
 format = 1
 tile_data = PoolIntArray( 0, 0, 0, 1, 0, 2, 8, 0, 196608, 9, 0, 7, 65536, 0, 131072, 65537, 0, 131074, 65545, 0, 131075, 196612, 0, 3, 196617, 0, 3, 262144, 0, 0, 262145, 0, 1, 262146, 0, 1, 262147, 0, 1, 262148, 0, 131079, 262152, 0, 0, 262153, 0, 131079, 327680, 0, 131072, 327681, 0, 131073, 327682, 0, 131073, 327683, 0, 131073, 327684, 0, 131074, 327688, 0, 131072, 327689, 0, 131074 )
 
@@ -525,17 +527,43 @@ position = Vector2( 58, 116 )
 [node name="Bush4" parent="YSort/Arbustos" instance=ExtResource( 2 )]
 position = Vector2( 186, 157 )
 
-[node name="Grass3" parent="." instance=ExtResource( 6 )]
-position = Vector2( 281, 106 )
+[node name="Ervas" type="YSort" parent="YSort"]
 
-[node name="Grass4" parent="." instance=ExtResource( 6 )]
-position = Vector2( 121, 105 )
+[node name="Grama" parent="YSort/Ervas" instance=ExtResource( 7 )]
+position = Vector2( 194, 110 )
 
-[node name="Grass5" parent="." instance=ExtResource( 6 )]
-position = Vector2( 248, 117 )
+[node name="Grama2" parent="YSort/Ervas" instance=ExtResource( 7 )]
+position = Vector2( 246, 111 )
 
-[node name="Grass6" parent="." instance=ExtResource( 6 )]
-position = Vector2( 201, 120 )
+[node name="Grama3" parent="YSort/Ervas" instance=ExtResource( 7 )]
+position = Vector2( 121, 123 )
 
-[node name="Grama" parent="." instance=ExtResource( 7 )]
-position = Vector2( 113, 49 )
+[node name="Grama4" parent="YSort/Ervas" instance=ExtResource( 7 )]
+position = Vector2( 104, 123 )
+
+[node name="Grama5" parent="YSort/Ervas" instance=ExtResource( 7 )]
+position = Vector2( 88, 123 )
+
+[node name="Grama6" parent="YSort/Ervas" instance=ExtResource( 7 )]
+position = Vector2( 214, 59 )
+
+[node name="Grama7" parent="YSort/Ervas" instance=ExtResource( 7 )]
+position = Vector2( 123, 61 )
+
+[node name="Grama8" parent="YSort/Ervas" instance=ExtResource( 7 )]
+position = Vector2( 123, 46 )
+
+[node name="Grama9" parent="YSort/Ervas" instance=ExtResource( 7 )]
+position = Vector2( 154, 26 )
+
+[node name="Os morcego" type="YSort" parent="YSort"]
+
+[node name="Bat" parent="YSort/Os morcego" instance=ExtResource( 6 )]
+position = Vector2( 186, 65 )
+collision_mask = 0
+
+[node name="Bat2" parent="YSort/Os morcego" instance=ExtResource( 6 )]
+position = Vector2( 237, 65 )
+
+[node name="Bat3" parent="YSort/Os morcego" instance=ExtResource( 6 )]
+position = Vector2( 186, 96 )

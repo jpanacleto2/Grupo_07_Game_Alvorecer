@@ -1,0 +1,73 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Enemies/Bat.gd" type="Script" id=1]
+[ext_resource path="res://Enemies/Bat.png" type="Texture" id=2]
+[ext_resource path="res://Shadows/SmallShadow.png" type="Texture" id=3]
+[ext_resource path="res://Overlap/HurtBox.tscn" type="PackedScene" id=4]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 16, 24 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 16, 0, 16, 24 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 16, 24 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 0, 16, 24 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 16, 24 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 15.0
+} ]
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 4.0
+
+[sub_resource type="CapsuleShape2D" id=8]
+radius = 7.0
+height = 8.0
+
+[node name="Bat" type="KinematicBody2D"]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 6 )
+animation = "Idle"
+playing = true
+offset = Vector2( 0, -12.465 )
+
+[node name="Sombra" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 7 )
+
+[node name="HurtBox" parent="." instance=ExtResource( 4 )]
+collision_layer = 8
+collision_mask = 128
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2( 0, -12 )
+shape = SubResource( 8 )
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+
+[editable path="HurtBox"]
