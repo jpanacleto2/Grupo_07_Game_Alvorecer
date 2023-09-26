@@ -1,9 +1,12 @@
 extends KinematicBody2D
 
-const ACCELERATION = 500
-const MAX_SPEED = 80
-const ROLL_SPEED = 120
-const FRICTION = 500
+# O export torna possível alterar o valor de variáveis pelo editor, sem precisar
+# entrar no código e, sobretudo, enquanto o jogo ainda está em execução.
+
+export var ACCELERATION = 500
+export var MAX_SPEED = 80
+export var ROLL_SPEED = 120
+export var FRICTION = 500
 
 enum {
 	MOVE,
