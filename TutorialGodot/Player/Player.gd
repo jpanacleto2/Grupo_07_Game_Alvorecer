@@ -29,7 +29,7 @@ func _ready():
 	swordHitbox.knockback_vector = roll_vector
 	
 #"main"
-func _process(delta):
+func _physics_process(delta):
 	
 	match state:
 		MOVE:
