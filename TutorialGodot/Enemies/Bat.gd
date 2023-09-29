@@ -19,7 +19,7 @@ var state = CHASE
 
 onready var sprite = $AnimatedSprite
 onready var stats = $Stats
-onready var playerDetectionZone = $PlayerDectectionZone
+onready var playerDetectionZone = $PlayerDetectionZone
 
 func _ready():
 	print(stats.max_health)
