@@ -491,7 +491,7 @@ position = Vector2( 160, 96 )
 scale = Vector2( 1, 1.01042 )
 texture = ExtResource( 4 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 320, 192 )
+region_rect = Rect2( 0, 0, 592, 400 )
 
 [node name="DirtPathTileMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
@@ -506,6 +506,11 @@ collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 0, 0, 0, 1, 0, 2, 8, 0, 196608, 9, 0, 7, 65536, 0, 131072, 65537, 0, 131074, 65545, 0, 131075, 196612, 0, 3, 196617, 0, 3, 262144, 0, 0, 262145, 0, 1, 262146, 0, 1, 262147, 0, 1, 262148, 0, 131079, 262152, 0, 0, 262153, 0, 131079, 327680, 0, 131072, 327681, 0, 131073, 327682, 0, 131073, 327683, 0, 131073, 327684, 0, 131074, 327688, 0, 131072, 327689, 0, 131074 )
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 143, 67 )
+current = true
+smoothing_enabled = true
+
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
@@ -513,6 +518,9 @@ position = Vector2( 143, 67 )
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
+remote_path = NodePath("../../../Camera2D")
 
 [node name="Arbustos" type="YSort" parent="YSort"]
 
@@ -580,11 +588,13 @@ position = Vector2( 260, 81 )
 [node name="Bat3" parent="YSort/Os morcego" instance=ExtResource( 6 )]
 position = Vector2( 36, 94 )
 
-[node name="HealthUI" parent="." instance=ExtResource( 8 )]
+[node name="Tree" parent="." instance=ExtResource( 9 )]
+position = Vector2( 229, 32 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 8 )]
 margin_left = 6.0
 margin_top = 6.0
 margin_right = 64.0
 margin_bottom = 17.0
-
-[node name="Tree" parent="." instance=ExtResource( 9 )]
-position = Vector2( 229, 32 )
