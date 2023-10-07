@@ -1,0 +1,118 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Enemies/Bat.png" type="Texture" id=1]
+[ext_resource path="res://Shadows/SmallShadow.png" type="Texture" id=2]
+[ext_resource path="res://Enemies/Morcego.gd" type="Script" id=3]
+[ext_resource path="res://Enemies/Stats.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Enemies/PlayerDetection.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Enemies/softCollision.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Enemies/Wanderer.tscn" type="PackedScene" id=7]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Idle"
+length = 0.45
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 3.16228
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 7.0
+height = 4.0
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 4.0
+
+[node name="Bat" type="KinematicBody2D"]
+collision_layer = 0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+MAX_SPEED = 75
+FRICTION = 200
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+offset = Vector2( 0, -12 )
+hframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+anims/Idle = SubResource( 1 )
+anims/RESET = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 3 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2( 0, -12 )
+shape = SubResource( 4 )
+
+[node name="Stats" parent="." instance=ExtResource( 4 )]
+max_health = 3
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( 1, -15 )
+shape = SubResource( 5 )
+
+[node name="SoftCollision" parent="." instance=ExtResource( 6 )]
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+shape = SubResource( 6 )
+
+[node name="Wanderer" parent="." instance=ExtResource( 7 )]
+
+[node name="PlayerDetection" parent="." instance=ExtResource( 5 )]
+
+[node name="CollisionShape2D" parent="PlayerDetection" index="0"]
+visible = false
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Area2D_area_entered"]
+
+[editable path="SoftCollision"]
+[editable path="Wanderer"]
+[editable path="PlayerDetection"]
+[editable path="PlayerDetection/LowPerception"]
