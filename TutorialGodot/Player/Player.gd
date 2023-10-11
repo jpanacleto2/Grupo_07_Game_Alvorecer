@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+const PlayerHurtSound = preload("res://Player/PlayerHurtSound.tscn")
+
 # O export torna possível alterar o valor de variáveis pelo editor, sem precisar
 # entrar no código e, sobretudo, enquanto o jogo ainda está em execução.
 
@@ -25,6 +27,7 @@ onready var animationTree = $AnimationTree
 onready var swordHitbox = $HitBoxPivot/SwordHitbox
 onready var animationState = animationTree.get("parameters/playback")
 onready var hurtbox = $HurtBox
+onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 
 func _ready():
 	randomize()
@@ -101,6 +104,16 @@ func attack_animation_finished():
 
 
 func _on_HurtBox_area_entered(area):
-	stats.health -= 1
-	hurtbox.start_invincibility(0.5)
+	stats.health -= area.damage
+	hurtbox.start_invincibility(0.6)
 	hurtbox.create_hit_effect()
+	var playerHurtSound = PlayerHurtSound.instance()
+	get_tree().current_scene.add_child(playerHurtSound)
+
+
+func _on_HurtBox_invincibility_started():
+	blinkAnimationPlayer.play("start")
+
+
+func _on_HurtBox_invincibility_ended():
+	blinkAnimationPlayer.play("stop")
