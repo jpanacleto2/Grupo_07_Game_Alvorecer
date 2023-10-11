@@ -13,10 +13,13 @@ onready var stats = $Stats
 onready var animationState = animationTree.get("parameters/playback")
 onready var state = IDLE
 
+var segundaFase = 1
 var velocity = Vector2.ZERO #movimentação
 var playerLoc = Vector2.ZERO #localização do player para a esquiva
 var on_cooldown = false #cooldown
 var attackID = 0 #numero usado para randomizar o proximo ataque
+
+signal segunda_fase
 
 enum{
 	IDLE, 
@@ -32,43 +35,54 @@ func _ready():
 
 
 func _physics_process(delta):
-	
-	match state:
-		IDLE:
-			#Mantém o boss parado enquanto procura o jogador
-			seek_player()
-		CHASE:
-			animationState.travel("Idle")
-			animationTree.set("parameters/Idle/blend_position", velocity)
-			#Acha o jogador e ataca ele
-			chase_state(delta) #linha63
-		ATTACK: 
-			#Ativa o moveset
-			match attackID:
-				1:
-					attack_state1(delta)
-				2:
-					#aqui ficara o attack_state2(delta)
-					attack_state1(delta)
-					print("ATAQUE 2")
-		COMBAT:
-			#Faz o boss recuar caso não esteja pronto para atacar dnv
-			combat_state(delta)
-		DODGE:
-			#Faz o boss esquivar
-			dodge_state(delta)
-	velocity = move_and_slide(velocity)
+	if playerPos.player != null:
+		match state:
+			IDLE:
+				#Mantém o boss parado enquanto procura o jogador
+				seek_player()
+			CHASE:
+				animationState.travel("Idle")
+				animationTree.set("parameters/Idle/blend_position", velocity)
+				#Acha o jogador e ataca ele
+				chase_state(delta) #linha63
+			ATTACK: 
+				#Ativa o moveset
+				match attackID:
+					1:
+						#ataque pesado
+						attack_state1(delta)
+					2:
+						#aqui fica ataque rapido
+						attack_state2(delta)
+			COMBAT:
+				#Faz o boss recuar caso não esteja pronto para atacar dnv
+				combat_state(delta)
+			DODGE:
+				#Faz o boss esquivar
+				dodge_state(delta)
+		velocity = move_and_slide(velocity)
 
 
 func attack_state1(delta):
 	#deixa as coordenadas prontas para o DODGE STATE
 	playerLoc = playerPos.player.global_position
-	animationTree.set("parameters/Roll/blend_position", global_position.direction_to(playerPos.player.global_position))
+	animationTree.set("parameters/Roll/blend_position", playerLoc)
 	
 	#Executa o ataque
 	animationState.travel("Attack")
 	velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-	start_cooldown(rand_range(1, 3))
+	start_cooldown(rand_range(1, 3)/segundaFase)
+	#Dodge STATE chamado ao terminar a animação
+
+
+func attack_state2(delta):
+	#deixa as coordenadas prontas para o DODGE STATE
+	playerLoc = playerPos.player.global_position
+	animationTree.set("parameters/Roll/blend_position", playerLoc)
+	#Executa o ataque
+	animationState.travel("AttackRapido")
+	velocity = global_position.direction_to(playerLoc) * 40
+	start_cooldown(rand_range(1, 3)/segundaFase)
 	#Dodge STATE chamado ao terminar a animação
 
 
@@ -80,13 +94,15 @@ func chase_state(delta):
 		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 		
 		#Se ele ja estiver perto e pronto para atacar, ele ataca
-		if global_position.distance_to(player.global_position) <= 40 && !on_cooldown:
+		if global_position.distance_to(player.global_position) <= 30 && !on_cooldown:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+			#velocity = Vector2.ZERO
 			animationTree.set("parameters/Attack/blend_position", direction)
+			animationTree.set("parameters/AttackRapido/blend_position", direction)
 			attackID = randi()%2+1 #pega um numero aleatorio entre 2 e 1
 			state = ATTACK
 		#Se ele estiver apenas perto ele para de avançar e não ataca
-		elif global_position.distance_to(player.global_position) <= 40:
+		elif global_position.distance_to(player.global_position) <= 30:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			state = CHASE
 	else:#se o jogador sair do seu range ele volta pro IDLE
@@ -110,25 +126,29 @@ func combat_state(delta):
 		state = IDLE
 
 func dodge_state(delta):
+	
 	animationState.travel("Roll")
 	#playerLoc localisa o jogador durante o ataque
 	var dodgeDirection = global_position.direction_to(playerLoc)
 	dodgeDirection = dodgeDirection.normalized()
 	velocity += dodgeDirection * -6
 	#COMBAT chamado ao terminar animação
+
 	
 #toca no fim do ataque
 func anim_finish():
-	state = DODGE
+	if randi()%2+1 == 1:
+		velocity = Vector2.ZERO
+		state = DODGE
+	else:
+		state = COMBAT
 
 #toca no fim da esquiva
 func anim_finish_dodge():
 	#fazendo assim, a velocidade do dodge e do combat não sao afetador
 	velocity = Vector2.ZERO #é parecido com "velocity.move_toward(Vector2.ZERO, 50)", so que instantaneo
 	state = COMBAT
-	
-	
-	
+
 
 
 func seek_player():
@@ -149,10 +169,24 @@ func _on_Hurtbox_area_entered(area):
 
 
 func _on_Stats_no_health():
-	queue_free()
+	if segundaFase == 2:
+		queue_free()
+	else:
+		emit_signal("segunda_fase")
+		iniciar_segunda_fase()
+		queue_free()
 
 func hitEffect(): 
 	var main = get_tree().current_scene
 	var hitEffect = HitEffect.instance()
 	main.add_child(hitEffect)
 	hitEffect.global_position = global_position
+
+func iniciar_segunda_fase():
+	var main = $".."
+	var Verdadeiro = load("res://Enemies/Ferromante.tscn")
+	var verdadeiro = Verdadeiro.instance()
+	main.add_child(verdadeiro)
+	verdadeiro.global_position = Vector2(271, 519)
+	verdadeiro.segundaFase = 2
+	verdadeiro.stats.set_health(stats.max_health/2)

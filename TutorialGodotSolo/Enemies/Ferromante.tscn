@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Enemies/Ferromante1.png" type="Texture" id=1]
 [ext_resource path="res://Enemies/PlayerDetection.tscn" type="PackedScene" id=2]
@@ -30,6 +30,29 @@ blend_point_2/node = SubResource( 22 )
 blend_point_2/pos = Vector2( 0, -1 )
 blend_point_3/node = SubResource( 30 )
 blend_point_3/pos = Vector2( 0, 1 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=41]
+animation = "AttackRapidoCima"
+
+[sub_resource type="AnimationNodeAnimation" id=42]
+animation = "AttackRapidoEsquerda"
+
+[sub_resource type="AnimationNodeAnimation" id=43]
+animation = "AttackRapidoBaixo"
+
+[sub_resource type="AnimationNodeAnimation" id=44]
+animation = "AttackRapidoDireita"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=45]
+blend_point_0/node = SubResource( 41 )
+blend_point_0/pos = Vector2( 0, -1 )
+blend_point_1/node = SubResource( 42 )
+blend_point_1/pos = Vector2( -1, 0 )
+blend_point_2/node = SubResource( 43 )
+blend_point_2/pos = Vector2( 0, 1 )
+blend_point_3/node = SubResource( 44 )
+blend_point_3/pos = Vector2( 1, 0 )
 blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id=26]
@@ -84,14 +107,20 @@ blend_point_3/pos = Vector2( -1, 0 )
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=39]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+
 [sub_resource type="AnimationNodeStateMachine" id=14]
 states/Attack/node = SubResource( 16 )
-states/Attack/position = Vector2( 623, 54 )
+states/Attack/position = Vector2( 851, 49 )
+states/AttackRapido/node = SubResource( 45 )
+states/AttackRapido/position = Vector2( 359, 82 )
 states/Idle/node = SubResource( 23 )
-states/Idle/position = Vector2( 222, 74 )
+states/Idle/position = Vector2( 570, 71 )
 states/Roll/node = SubResource( 37 )
-states/Roll/position = Vector2( 305, 143 )
-transitions = [ "Idle", "Attack", SubResource( 24 ), "Attack", "Idle", SubResource( 25 ), "Idle", "Roll", SubResource( 38 ), "Roll", "Idle", SubResource( 39 ) ]
+states/Roll/position = Vector2( 587, 158 )
+transitions = [ "Idle", "Attack", SubResource( 24 ), "Attack", "Idle", SubResource( 25 ), "Idle", "Roll", SubResource( 38 ), "Roll", "Idle", SubResource( 39 ), "AttackRapido", "Idle", SubResource( 46 ), "Idle", "AttackRapido", SubResource( 47 ) ]
 start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=13]
@@ -253,6 +282,233 @@ tracks/3/keys = {
 "times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
+"args": [  ],
+"method": "anim_finish"
+} ]
+}
+
+[sub_resource type="Animation" id=48]
+resource_name = "AttackRapidoBaixo"
+length = 0.95
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 35, 36, 37, 38, 39, 35, 36, 37, 38, 39 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "redirect"
+}, {
+"args": [  ],
+"method": "anim_finish"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Position2D/HitBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Position2D:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+
+[sub_resource type="Animation" id=49]
+resource_name = "AttackRapidoCima"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 33, 28, 29, 30, 31, 32, 28, 29, 30, 31 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Position2D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Position2D/HitBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.5, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "redirect"
+}, {
+"args": [  ],
+"method": "anim_finish"
+} ]
+}
+
+[sub_resource type="Animation" id=50]
+resource_name = "AttackRapidoDireita"
+length = 0.95
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 28, 24, 25, 26, 27, 28, 27, 24, 25, 26 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "redirect"
+}, {
+"args": [  ],
+"method": "anim_finish"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Position2D:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Position2D/HitBox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true ]
+}
+
+[sub_resource type="Animation" id=51]
+resource_name = "AttackRapidoEsquerda"
+length = 0.95
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 29, 32, 33, 34, 35, 31, 32, 33, 34, 35 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Position2D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 180.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Position2D/HitBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.5, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "redirect"
+}, {
 "args": [  ],
 "method": "anim_finish"
 } ]
@@ -426,7 +682,7 @@ rotation = 1.5708
 shape = SubResource( 40 )
 
 [node name="Stats" parent="." instance=ExtResource( 4 )]
-max_health = 12
+max_health = 2
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -437,6 +693,7 @@ tree_root = SubResource( 14 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 13 )
 parameters/Attack/blend_position = Vector2( 0.139461, 0.293103 )
+parameters/AttackRapido/blend_position = Vector2( 0.0047543, 0.907514 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Roll/blend_position = Vector2( 0, 0 )
 
@@ -444,6 +701,10 @@ parameters/Roll/blend_position = Vector2( 0, 0 )
 anims/AttackBaixo = SubResource( 17 )
 anims/AttackCima = SubResource( 18 )
 anims/AttackEsquerda = SubResource( 19 )
+anims/AttackRapidoBaixo = SubResource( 48 )
+anims/AttackRapidoCima = SubResource( 49 )
+anims/AttackRapidoDireita = SubResource( 50 )
+anims/AttackRapidoEsquerda = SubResource( 51 )
 anims/RESET = SubResource( 1 )
 anims/RollDireita = SubResource( 32 )
 anims/WalkDireita = SubResource( 2 )
@@ -459,10 +720,8 @@ visible = false
 visible = false
 
 [node name="Position2D" type="Position2D" parent="."]
-visible = false
 
 [node name="HitBox" type="Area2D" parent="Position2D"]
-visible = false
 position = Vector2( 14, 0 )
 collision_layer = 128
 collision_mask = 128
@@ -471,7 +730,6 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D/HitBox"]
-visible = false
 shape = SubResource( 4 )
 
 [node name="Timer" type="Timer" parent="."]

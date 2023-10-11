@@ -49,8 +49,8 @@ func movement(delta):
 	if input_vector != Vector2.ZERO:
 		knockBack.knockBack_vector = input_vector
 		roll_velocity = input_vector
-		animationTree.set("parameters/Idle/blend_position", velocity)
-		animationTree.set("parameters/Run/blend_position", velocity)
+		animationTree.set("parameters/Idle/blend_position", input_vector)
+		animationTree.set("parameters/Run/blend_position", input_vector)
 		animationTree.set("parameters/Attack/blend_position", input_vector)
 		animationTree.set("parameters/Rolar/blend_position", input_vector)
 		animationState.travel("Run")
