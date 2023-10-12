@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Bush.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://World/Grama.tscn" type="PackedScene" id=7]
 [ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=8]
 [ext_resource path="res://World/Tree.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Camera2D.tscn" type="PackedScene" id=10]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -487,7 +488,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 [node name="World" type="Node2D"]
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 160, 96 )
+position = Vector2( 130, 72 )
 scale = Vector2( 1, 1.01042 )
 texture = ExtResource( 4 )
 region_enabled = true
@@ -506,15 +507,12 @@ collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 0, 0, 0, 1, 0, 2, 8, 0, 196608, 9, 0, 7, 65536, 0, 131072, 65537, 0, 131074, 65545, 0, 131075, 196612, 0, 3, 196617, 0, 3, 262144, 0, 0, 262145, 0, 1, 262146, 0, 1, 262147, 0, 1, 262148, 0, 131079, 262152, 0, 0, 262153, 0, 131079, 327680, 0, 131072, 327681, 0, 131073, 327682, 0, 131073, 327683, 0, 131073, 327684, 0, 131074, 327688, 0, 131072, 327689, 0, 131074 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 143, 67 )
-current = true
-smoothing_enabled = true
+[node name="Camera2D" parent="." instance=ExtResource( 10 )]
 
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 143, 67 )
+position = Vector2( 160, 90 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -598,3 +596,5 @@ margin_left = 6.0
 margin_top = 6.0
 margin_right = 64.0
 margin_bottom = 17.0
+
+[editable path="Camera2D"]
