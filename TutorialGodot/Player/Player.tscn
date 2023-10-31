@@ -443,6 +443,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=44]
 resource_name = "RollDown"
@@ -486,6 +498,18 @@ tracks/2/keys = {
 "stream": ExtResource( 9 )
 } ],
 "times": PoolRealArray( 0.1 )
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=45]
@@ -531,6 +555,18 @@ tracks/2/keys = {
 } ],
 "times": PoolRealArray( 0.1 )
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Animation" id=46]
 resource_name = "RollRight"
@@ -575,6 +611,18 @@ tracks/2/keys = {
 } ],
 "times": PoolRealArray( 0.1 )
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Animation" id=47]
 resource_name = "RollUp"
@@ -618,6 +666,18 @@ tracks/2/keys = {
 "stream": ExtResource( 9 )
 } ],
 "times": PoolRealArray( 0.1 )
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -816,8 +876,8 @@ graph_offset = Vector2( 91, 21.24 )
 [sub_resource type="CapsuleShape2D" id=43]
 height = 12.0
 
-[sub_resource type="CapsuleShape2D" id=55]
-radius = 5.0
+[sub_resource type="CapsuleShape2D" id=61]
+radius = 6.0
 height = 6.0
 
 [sub_resource type="Animation" id=60]
@@ -849,7 +909,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true, false ]
+"values": [ false, true ]
 }
 
 [sub_resource type="Animation" id=59]
@@ -937,18 +997,18 @@ script = ExtResource( 4 )
 visible = false
 shape = SubResource( 43 )
 
-[node name="HurtBox" parent="." instance=ExtResource( 5 )]
-visible = false
-collision_layer = 4
-
-[node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2( 0, -4 )
-shape = SubResource( 55 )
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 
+[node name="HurtBox" parent="." instance=ExtResource( 5 )]
+collision_layer = 4
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2( 0, -2 )
+shape = SubResource( 61 )
+
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "stop"
 anims/RESET = SubResource( 60 )
 anims/start = SubResource( 58 )
 anims/stop = SubResource( 59 )

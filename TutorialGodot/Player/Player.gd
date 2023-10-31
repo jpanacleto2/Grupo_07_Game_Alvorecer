@@ -17,9 +17,12 @@ enum {
 }
 
 var state = MOVE
+var input_vector = Vector2.ZERO
 var velocity = Vector2.ZERO
 var roll_vector = Vector2.DOWN
 var stats = PlayerStats
+var inv_aberto = false
+
 
 #variável de acesso para animação de correr para os lados
 onready var animationPlayer = $AnimationPlayer
@@ -28,9 +31,11 @@ onready var swordHitbox = $HitBoxPivot/SwordHitbox
 onready var animationState = animationTree.get("parameters/playback")
 onready var hurtbox = $HurtBox
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
+const inv = preload("res://Inventario/Inventario.tscn")
 
 func _ready():
-	randomize()
+	#randomize()
+	
 	stats.connect("no_health", self, "queue_free")
 	animationTree.active = true
 	swordHitbox.knockback_vector = roll_vector
@@ -50,10 +55,23 @@ func _physics_process(delta):
 	
 	velocity = move_and_slide(velocity)
 	
+	if Input.is_action_just_pressed("Abrir_Inv"):
+		print(inv_aberto)
+		if inv_aberto == false:
+			var inventario = inv.instance()
+			var main = $"/root/World/CanvasLayer"
+			main.add_child(inventario)
+			inv_aberto = true 
+		else:
+			if get_node("/root/World/CanvasLayer/Inventario") != null:
+				get_node("/root/World/CanvasLayer/Inventario").free()
+			inv_aberto = false
+		
+	
 
 func move_state(delta): 
 	
-	var input_vector = Vector2.ZERO
+	input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()
@@ -84,7 +102,6 @@ func move_state(delta):
 	
 func roll_state(delta):
 	velocity = roll_vector * ROLL_SPEED
-	hurtbox.start_invincibility(0.5)
 	animationState.travel("Roll")
 	#move()
 
