@@ -732,8 +732,6 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D/HitBox"]
 shape = SubResource( 4 )
 
-[node name="Timer" type="Timer" parent="."]
-
 [node name="Hurtbox" type="Area2D" parent="."]
 visible = false
 collision_layer = 0
@@ -746,9 +744,14 @@ __meta__ = {
 position = Vector2( -1, -9 )
 shape = SubResource( 31 )
 
+[node name="Timer" type="Timer" parent="."]
+
+[node name="ArrowBird_Timer" type="Timer" parent="."]
+
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="ArrowBird_Timer" to="." method="_on_ArrowBird_Timer_timeout"]
 
 [editable path="Stats"]
 [editable path="PlayerDetection"]

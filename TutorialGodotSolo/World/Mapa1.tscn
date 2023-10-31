@@ -494,7 +494,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 } ]
 0/z_index = 0
 
-[node name="Node2D" type="Node2D"]
+[node name="World" type="Node2D"]
 
 [node name="Grama" type="Sprite" parent="."]
 position = Vector2( 165, 87 )
@@ -521,13 +521,13 @@ tile_data = PoolIntArray( -131074, 0, 0, -131073, 0, 1, -196608, 0, 1, -196607, 
 
 [node name="YSort" type="YSort" parent="."]
 
-[node name="KinematicBody2D" parent="YSort" instance=ExtResource( 1 )]
+[node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 40, 307 )
 
-[node name="Cameraman" type="KinematicBody2D" parent="YSort/KinematicBody2D"]
+[node name="Cameraman" type="KinematicBody2D" parent="YSort/Player"]
 script = ExtResource( 11 )
 
-[node name="PlayerRemote" type="RemoteTransform2D" parent="YSort/KinematicBody2D/Cameraman"]
+[node name="PlayerRemote" type="RemoteTransform2D" parent="YSort/Player/Cameraman"]
 remote_path = NodePath("../../../../PlayerCam")
 
 [node name="Ferromante" parent="YSort" instance=ExtResource( 9 )]
@@ -561,7 +561,7 @@ position = Vector2( 92, 86 )
 [node name="Enemies" type="YSort" parent="YSort"]
 
 [node name="Bat" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( -50, 177 )
+position = Vector2( -84, 155 )
 
 [node name="Bat2" parent="YSort/Enemies" instance=ExtResource( 7 )]
 position = Vector2( 148, 60 )
@@ -570,7 +570,7 @@ position = Vector2( 148, 60 )
 position = Vector2( -101, -9 )
 
 [node name="Bat4" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 278, 177 )
+position = Vector2( 248, 177 )
 
 [node name="Bat5" parent="YSort/Enemies" instance=ExtResource( 7 )]
 position = Vector2( 230, -27 )
@@ -592,5 +592,8 @@ current = true
 
 [node name="Timer" type="Timer" parent="."]
 
-[connection signal="segunda_fase" from="YSort/Ferromante" to="YSort/KinematicBody2D/Cameraman" method="_on_Ferromante_segunda_fase"]
-[connection signal="timeout" from="Timer" to="YSort/KinematicBody2D/Cameraman" method="_on_Timer_timeout"]
+[node name="ArrowBird_Timer" type="Timer" parent="."]
+wait_time = 0.3
+
+[connection signal="segunda_fase" from="YSort/Ferromante" to="YSort/Player/Cameraman" method="_on_Ferromante_segunda_fase"]
+[connection signal="timeout" from="Timer" to="YSort/Player/Cameraman" method="_on_Timer_timeout"]

@@ -3,16 +3,23 @@ extends KinematicBody2D
 const MAX_SPEED = 200
 const ACCELERATION = 300
 const FRICTION = 1000
-
+const wolf_scene = preload("res://Enemies/Wolf.tscn")
+const bird_scene = preload("res://Enemies/ArrowBird.tscn")
 const HitEffect = preload ("res://Effects/Hit.tscn")
+
 onready var playerPos = $PlayerDetection
 onready var animPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var timer = $Timer
+onready var arrowBirdTimer = $ArrowBird_Timer
 onready var stats = $Stats
 onready var animationState = animationTree.get("parameters/playback")
 onready var state = IDLE
 
+var contagem_lobos = 0
+var limite_lobos = 2
+var limite_passaros = 5
+var current_iteration = 0
 var segundaFase = 1
 var velocity = Vector2.ZERO #movimentação
 var playerLoc = Vector2.ZERO #localização do player para a esquiva
@@ -32,8 +39,6 @@ enum{
 func _ready():
 	animationTree.active = true
  
-
-
 func _physics_process(delta):
 	if playerPos.player != null:
 		match state:
@@ -54,6 +59,9 @@ func _physics_process(delta):
 					2:
 						#aqui fica ataque rapido
 						attack_state2(delta)
+					3:
+						# Summon dos mobs
+						attack_state3()
 			COMBAT:
 				#Faz o boss recuar caso não esteja pronto para atacar dnv
 				combat_state(delta)
@@ -85,7 +93,30 @@ func attack_state2(delta):
 	start_cooldown(rand_range(1, 3)/segundaFase)
 	#Dodge STATE chamado ao terminar a animação
 
+func attack_state3():
+	
+	if contagem_lobos < limite_lobos:
+		var wolf = wolf_scene.instance()
+		get_tree().get_root().get_node(".").add_child(wolf)
+		
+		wolf.connect("enemy_killed", self, "wolf_killed_handler")
+		contagem_lobos += 1
+	
+	if current_iteration < limite_passaros:
+		
 
+		# Summonando os pássaros
+		var bird = bird_scene.instance()
+		get_tree().get_root().get_node(".").add_child(bird)
+		
+		current_iteration += 1
+		arrowBirdTimer.start(0.3) # Tempo de espera pros pássaros aparecerem
+		
+	else:
+		current_iteration = 0
+		start_cooldown(rand_range(1, 3))
+		anim_finish()
+		
 func chase_state(delta):
 	var player = playerPos.player
 	if player != null:
@@ -99,7 +130,7 @@ func chase_state(delta):
 			#velocity = Vector2.ZERO
 			animationTree.set("parameters/Attack/blend_position", direction)
 			animationTree.set("parameters/AttackRapido/blend_position", direction)
-			attackID = randi()%2+1 #pega um numero aleatorio entre 2 e 1
+			attackID = 3 #randi()%3+1 #pega um numero aleatorio entre 3 e 1
 			state = ATTACK
 		#Se ele estiver apenas perto ele para de avançar e não ataca
 		elif global_position.distance_to(player.global_position) <= 30:
@@ -149,8 +180,6 @@ func anim_finish_dodge():
 	velocity = Vector2.ZERO #é parecido com "velocity.move_toward(Vector2.ZERO, 50)", so que instantaneo
 	state = COMBAT
 
-
-
 func seek_player():
 	if playerPos.can_see_player():
 		state = CHASE
@@ -190,3 +219,11 @@ func iniciar_segunda_fase():
 	verdadeiro.global_position = Vector2(271, 519)
 	verdadeiro.segundaFase = 2
 	verdadeiro.stats.set_health(stats.max_health/2)
+
+func wolf_killed_handler():
+	contagem_lobos -= 1
+
+func _on_ArrowBird_Timer_timeout():
+	# Condicional que impede a função attack_state3 de ser chamada infinitamente
+	if current_iteration < limite_passaros:
+		attack_state3()

@@ -1,8 +1,9 @@
 extends KinematicBody2D
 
-onready var Stats = $Stats
-var knockback = Vector2.ZERO
+signal enemy_killed
 
+onready var FerromanteNode =  get_tree().get_root().get_node("World/YSort/Ferromante")
+onready var Stats = $Stats
 
 enum{
 	IDLE,
@@ -21,13 +22,19 @@ onready var softCollision = $SoftCollision
 onready var sprite = $Sprite
 onready var wander = $Wanderer
 
+
 var main = preload("res://Player/Player.tscn")
 var MopaEffect = preload("res://Effects/Hit.tscn")
 var GanoEffect = preload("res://Effects/Death.tscn")
 var look_vector
-
+var knockback = Vector2.ZERO
+var spawn = false
 
 func _physics_process(delta):
+	if !spawn :
+		position = FerromanteNode.global_position
+		spawn = true
+	
 	match state:
 		IDLE:
 			seek_player()
@@ -84,10 +91,12 @@ func hitEffect():
 	main.add_child(mopaEffect)
 	mopaEffect.global_position = global_position
 
+
 func _on_Hurtbox_area_entered(area):
 	knockback = area.knockBack_vector * 150
 	Stats.health -= 1
 	if Stats.health <= 0:
+		emit_signal("enemy_killed")
 		deathEffect()
 		queue_free()
 	else:

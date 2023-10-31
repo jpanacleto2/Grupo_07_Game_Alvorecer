@@ -110,6 +110,7 @@ shape = SubResource( 6 )
 [node name="CollisionShape2D" parent="PlayerDetection" index="0"]
 visible = false
 
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Area2D_area_entered"]
 
 [editable path="SoftCollision"]
