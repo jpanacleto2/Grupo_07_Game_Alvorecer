@@ -1,0 +1,100 @@
+{
+  "10001": {
+    "Name": "Old Sword",
+    "Category": "Weapon",
+    "Type": "Sword",
+    "EquipmentSlot": "MainHand",
+    "Attack": 20,
+    "Defense": 10,
+    "Block": null,
+    "PotionHealth": null,
+    "PotionMana": null
+    
+    
+  },
+  "10002": {
+    "Name": "Common Sword",
+    "Category": "Weapon",
+    "Type": "Sword",
+    "EquipmentSlot": "MainHand",
+    "Attack": 60,
+    "Defense": null,
+    "Block": null,
+    "PotionHealth": null,
+    "PotionMana": null
+    
+    
+  },
+  "10003": {
+    "Name": "Epic Sword",
+    "Category": "Weapon",
+    "Type": "Sword",
+    "EquipmentSlot": "MainHand",
+    "Attack": 450,
+    "Defense": null,
+    "Block": null,
+    "PotionHealth": null,
+    "PotionMana": null
+    
+  },
+  "10004": {
+    "Name": "Axe",
+    "Category": "Weapon",
+    "Type": "Axe",
+    "EquipmentSlot": "MainHand",
+    "Attack": 150,
+    "Defense": null,
+    "Block": null,
+    "PotionHealth": null,
+    "PotionMana": null
+
+  },
+  "10005": {
+    "Name": "GreyuII",
+    "Category": "Potion",
+    "Type": "GreyuII",
+    "EquipmentSlot": "OffHand",
+    "Attack": null,
+    "Defense": null,
+    "Block": null,
+    "PotionHealth": 5,
+    "PotionMana": 5
+    
+  },
+  "10006": {
+    "Name": "Lesser Health Potion",
+    "Category": "Potion",
+    "Type": "HealthPotion",
+    "EquipmentSlot": null,
+    "Attack": null,
+    "Defense": null,
+    "Block": null,
+    "PotionHealth": 250,
+    "PotionMana": null
+    
+  },
+  "10008": {
+    "Name": "Loaf of Bread",
+    "Category": "Food",
+    "Type": "Food",
+    "EquipmentSlot": null,
+    "Attack": null,
+    "Defense": null,
+    "Block": null,
+    "PotionHealth": null,
+    "PotionMana": null
+    
+  },
+  "10009": {
+    "Name": "Steel Armor",
+    "Category": "Armor",
+    "Type": "Armor",
+    "EquipmentSlot": "Chest",
+    "Attack": null,
+    "Defense": 260,
+    "Block": null,
+    "PotionHealth": null,
+    "PotionMana": null
+    
+  }
+}

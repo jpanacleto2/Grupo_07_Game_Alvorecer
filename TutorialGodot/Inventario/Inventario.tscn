@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Inventario/Inventario.gd" type="Script" id=1]
+[ext_resource path="res://Inventario/Inventario.png" type="Texture" id=2]
+
+[node name="Inventario" type="Control"]
+anchor_right = 0.412
+anchor_bottom = 0.333
+margin_left = 135.0
+margin_top = 46.0
+margin_right = 186.16
+margin_bottom = 83.06
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Background" type="NinePatchRect" parent="."]
+anchor_right = 1.03
+anchor_bottom = 0.983
+margin_right = -4.14001
+margin_bottom = 1.394
+texture = ExtResource( 2 )
+
+[node name="M" type="MarginContainer" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 6.0
+margin_right = -4.34998
+margin_bottom = -3.745
+
+[node name="GridContainer" type="GridContainer" parent="Background/M"]
+margin_right = 175.0
+margin_bottom = 86.0
+custom_constants/vseparation = 22
+custom_constants/hseparation = 22
+columns = 8
