@@ -13,7 +13,8 @@ export var FRICTION = 500
 enum {
 	MOVE,
 	ROLL,
-	ATTACK
+	ATTACK,
+	STOP
 }
 
 var state = MOVE
@@ -35,7 +36,7 @@ const inv = preload("res://Inventario/Inventario.tscn")
 
 func _ready():
 	#randomize()
-	
+	get_tree().current_scene.Player = self
 	stats.connect("no_health", self, "queue_free")
 	animationTree.active = true
 	swordHitbox.knockback_vector = roll_vector
@@ -52,21 +53,31 @@ func _physics_process(delta):
 		
 		ATTACK:
 			attack_state(delta)
+		
+		STOP:
+			velocity = Vector2.ZERO
 	
 	velocity = move_and_slide(velocity)
 	
-	if Input.is_action_just_pressed("Abrir_Inv"):
-		print(inv_aberto)
-		if inv_aberto == false:
-			var inventario = inv.instance()
-			var main = $"/root/World/CanvasLayer"
-			main.add_child(inventario)
-			inv_aberto = true 
-		else:
-			if get_node("/root/World/CanvasLayer/Inventario") != null:
-				get_node("/root/World/CanvasLayer/Inventario").free()
-			inv_aberto = false
+#	if Input.is_action_just_pressed("Abrir_Inv"):
+#		if inv_aberto == false:
+#			inv_aberto = true
+#		else:
+#			if get_node("/root/World/CanvasLayer/Inventario") != null:
+#				get_node("/root/World/CanvasLayer/Inventario").free()
+#			inv_aberto = false
+	if Input.is_action_just_pressed("Abrir_Inv") && inv_aberto == false:
+		inv_aberto = true
+	elif Input.is_action_just_pressed("Abrir_Inv"):
+		inv_aberto = false
 		
+	if inv_aberto == false && get_node("/root/World/CanvasLayer/Inventario") != null:
+		get_node("/root/World/CanvasLayer/Inventario").free()
+	elif inv_aberto == true && get_node("/root/World/CanvasLayer/Inventario") == null: 
+		var inventario = inv.instance()
+		var main = $"../../CanvasLayer"
+		main.add_child(inventario)
+		inv_aberto = true
 	
 
 func move_state(delta): 

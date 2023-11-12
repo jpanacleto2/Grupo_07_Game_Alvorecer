@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Bush.tscn" type="PackedScene" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://Enemies/Bosses/Ferromante/Ferromante.tscn" type="PackedScene" id=10]
 [ext_resource path="res://WhiteColor.gdshader" type="Shader" id=11]
 [ext_resource path="res://Player/CameraMan.gd" type="Script" id=12]
+[ext_resource path="res://Enemies/Fungo/Fungo.tscn" type="PackedScene" id=13]
+[ext_resource path="res://World/Mapa1.gd" type="Script" id=14]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -498,6 +500,7 @@ shader = ExtResource( 11 )
 shader_param/active = true
 
 [node name="World" type="Node2D"]
+script = ExtResource( 14 )
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 130, 72 )
@@ -521,11 +524,8 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 2, 8, 0, 196608, 9, 0, 7, 65536, 0, 131
 
 [node name="YSort" type="YSort" parent="."]
 
-[node name="Ferromante" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( 331, 287 )
-
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 201, 284 )
+position = Vector2( 174, 289 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -536,26 +536,6 @@ script = ExtResource( 12 )
 [node name="Camera2D" type="Camera2D" parent="YSort/Player/CameraMan"]
 current = true
 smoothing_enabled = true
-
-[node name="Os morcego" type="YSort" parent="YSort"]
-
-[node name="Bat" parent="YSort/Os morcego" instance=ExtResource( 6 )]
-position = Vector2( 240, -129 )
-collision_mask = 0
-
-[node name="Bat2" parent="YSort/Os morcego" instance=ExtResource( 6 )]
-position = Vector2( 335, 82 )
-
-[node name="AnimatedSprite" parent="YSort/Os morcego/Bat2" index="0"]
-material = SubResource( 51 )
-frame = 4
-
-[node name="Bat3" parent="YSort/Os morcego" instance=ExtResource( 6 )]
-position = Vector2( -71, 81 )
-
-[node name="AnimatedSprite" parent="YSort/Os morcego/Bat3" index="0"]
-material = SubResource( 50 )
-frame = 0
 
 [node name="Cenario" type="YSort" parent="YSort"]
 
@@ -616,6 +596,37 @@ position = Vector2( 237, 182 )
 [node name="Tree3" parent="YSort/Cenario/Trees" instance=ExtResource( 9 )]
 position = Vector2( 24, 145 )
 
+[node name="Inimigos" type="YSort" parent="YSort"]
+
+[node name="Ferromante" parent="YSort/Inimigos" instance=ExtResource( 10 )]
+position = Vector2( 276, 283 )
+
+[node name="Os morcego" type="YSort" parent="YSort/Inimigos"]
+
+[node name="Bat" parent="YSort/Inimigos/Os morcego" instance=ExtResource( 6 )]
+position = Vector2( 240, -129 )
+collision_mask = 0
+
+[node name="Bat2" parent="YSort/Inimigos/Os morcego" instance=ExtResource( 6 )]
+position = Vector2( 335, 82 )
+
+[node name="AnimatedSprite" parent="YSort/Inimigos/Os morcego/Bat2" index="0"]
+material = SubResource( 51 )
+frame = 0
+
+[node name="Bat3" parent="YSort/Inimigos/Os morcego" instance=ExtResource( 6 )]
+position = Vector2( -71, 81 )
+
+[node name="AnimatedSprite" parent="YSort/Inimigos/Os morcego/Bat3" index="0"]
+material = SubResource( 50 )
+frame = 1
+
+[node name="Fungos" type="YSort" parent="YSort/Inimigos"]
+position = Vector2( -61, -16 )
+
+[node name="Fungo" parent="YSort/Inimigos/Fungos" instance=ExtResource( 13 )]
+position = Vector2( -4, -70 )
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 8 )]
@@ -626,16 +637,17 @@ margin_bottom = 17.0
 
 [node name="Timer" type="Timer" parent="."]
 
-[connection signal="segunda_fase" from="YSort/Ferromante" to="YSort/Player/CameraMan" method="_on_Ferromante_segunda_fase"]
+[connection signal="segunda_fase" from="YSort/Inimigos/Ferromante" to="." method="_on_Ferromante_segunda_fase"]
+[connection signal="segunda_fase" from="YSort/Inimigos/Ferromante" to="YSort/Player/CameraMan" method="_on_Ferromante_segunda_fase"]
 [connection signal="timeout" from="Timer" to="YSort/Player/CameraMan" method="_on_Timer_timeout"]
 
-[editable path="YSort/Os morcego/Bat2"]
-[editable path="YSort/Os morcego/Bat2/HurtBox"]
-[editable path="YSort/Os morcego/Bat2/PlayerDetectionZone"]
-[editable path="YSort/Os morcego/Bat2/HitBox"]
-[editable path="YSort/Os morcego/Bat2/SoftCollision"]
-[editable path="YSort/Os morcego/Bat3"]
-[editable path="YSort/Os morcego/Bat3/HurtBox"]
-[editable path="YSort/Os morcego/Bat3/PlayerDetectionZone"]
-[editable path="YSort/Os morcego/Bat3/HitBox"]
-[editable path="YSort/Os morcego/Bat3/SoftCollision"]
+[editable path="YSort/Inimigos/Os morcego/Bat2"]
+[editable path="YSort/Inimigos/Os morcego/Bat2/HurtBox"]
+[editable path="YSort/Inimigos/Os morcego/Bat2/PlayerDetectionZone"]
+[editable path="YSort/Inimigos/Os morcego/Bat2/HitBox"]
+[editable path="YSort/Inimigos/Os morcego/Bat2/SoftCollision"]
+[editable path="YSort/Inimigos/Os morcego/Bat3"]
+[editable path="YSort/Inimigos/Os morcego/Bat3/HurtBox"]
+[editable path="YSort/Inimigos/Os morcego/Bat3/PlayerDetectionZone"]
+[editable path="YSort/Inimigos/Os morcego/Bat3/HitBox"]
+[editable path="YSort/Inimigos/Os morcego/Bat3/SoftCollision"]

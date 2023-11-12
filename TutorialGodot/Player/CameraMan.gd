@@ -26,6 +26,7 @@ func _physics_process(delta):
 				 global_position.distance_to(player.global_position) * delta * 100)
 			
 		FERROMANTE:
+			player.state = player.STOP
 			velocity = velocity.move_toward(global_position.direction_to(target) * 500, global_position.distance_to(target) * delta * 100)
 			if global_position.distance_to(target)  <= 50:
 				velocity = Vector2.ZERO
@@ -35,8 +36,9 @@ func _physics_process(delta):
 
 func _on_Ferromante_segunda_fase():
 	transition = FERROMANTE
-	timer.start(3)
+	timer.start(4)
 	
 
 func _on_Timer_timeout():
+	player.state = player.MOVE
 	transition = PLAYER
