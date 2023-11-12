@@ -249,26 +249,26 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachine" id=14]
 states/Attack/node = SubResource( 16 )
-states/Attack/position = Vector2( 973, 57 )
+states/Attack/position = Vector2( 683, -8 )
 states/AttackRapido/node = SubResource( 45 )
-states/AttackRapido/position = Vector2( 166, 81 )
+states/AttackRapido/position = Vector2( 268, 2 )
 states/AttackTeleporte/node = SubResource( 60 )
-states/AttackTeleporte/position = Vector2( 1092, 120 )
+states/AttackTeleporte/position = Vector2( 756, 111 )
 states/Idle/node = SubResource( 23 )
 states/Idle/position = Vector2( 462, 120 )
 states/Levantar/node = SubResource( 104 )
-states/Levantar/position = Vector2( 635, 185 )
+states/Levantar/position = Vector2( 662, 235 )
 states/Morte/node = SubResource( 97 )
-states/Morte/position = Vector2( -50, 245 )
+states/Morte/position = Vector2( 268, 254 )
 states/Palmas/node = SubResource( 89 )
-states/Palmas/position = Vector2( 129, 165 )
+states/Palmas/position = Vector2( 168, 120 )
 states/Roll/node = SubResource( 37 )
-states/Roll/position = Vector2( 496, 245 )
+states/Roll/position = Vector2( 462, 259 )
 states/Walk/node = SubResource( 72 )
-states/Walk/position = Vector2( 512, 34 )
+states/Walk/position = Vector2( 450, -21 )
 transitions = [ "Idle", "Attack", SubResource( 24 ), "Attack", "Idle", SubResource( 25 ), "Idle", "Roll", SubResource( 38 ), "Roll", "Idle", SubResource( 39 ), "AttackRapido", "Idle", SubResource( 46 ), "Idle", "AttackRapido", SubResource( 47 ), "Idle", "AttackTeleporte", SubResource( 61 ), "AttackTeleporte", "Idle", SubResource( 62 ), "Walk", "Idle", SubResource( 73 ), "Idle", "Walk", SubResource( 74 ), "Idle", "Palmas", SubResource( 90 ), "Palmas", "Idle", SubResource( 91 ), "Idle", "Morte", SubResource( 98 ), "Idle", "Levantar", SubResource( 105 ), "Levantar", "Idle", SubResource( 106 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -289, 76 )
+graph_offset = Vector2( -123, -87 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=13]
 

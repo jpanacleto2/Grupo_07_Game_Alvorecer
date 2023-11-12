@@ -15,7 +15,7 @@ export var FRICTION = 300
 onready var velocity = Vector2.ZERO
 onready var playerPos = $PlayerDetection
 onready var softCollision = $SoftCollision
-onready var sprite = $Sprite
+onready var sprite = $AnimatedSprite
 onready var wander = $Wanderer
 
 
@@ -32,7 +32,7 @@ func _ready():
 
 
 func _physics_process(delta):
-	
+	sprite.flip_h = velocity.x < 0
 	#var player = playerPos.player
 	var direction
 	if is_instance_valid(player):

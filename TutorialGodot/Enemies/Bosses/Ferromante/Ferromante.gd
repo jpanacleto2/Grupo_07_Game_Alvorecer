@@ -97,7 +97,7 @@ func _physics_process(delta):
 #		if global_position.distance_to(player.global_position) >= 40 && Input.is_action_just_pressed("Attack"):
 #			if randi()%2+1 == 1:
 #				desvio_e_te_mato()
-		if Input.is_action_just_pressed("Attack"):
+		if Input.is_action_just_pressed("Attack") && state != IDLE:
 			yield(get_tree().create_timer(0.2), "timeout")
 			if !recebeu_dano && randi()%4+1 == 1:
 				desvio_e_te_mato()
