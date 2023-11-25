@@ -37,7 +37,7 @@ const inv = preload("res://Inventario/Inventario.tscn")
 func _ready():
 	#randomize()
 	get_tree().current_scene.Player = self
-	stats.connect("no_health", self, "queue_free")
+	#stats.connect("no_health", self, "queue_free")
 	animationTree.active = true
 	swordHitbox.knockback_vector = roll_vector
 	
