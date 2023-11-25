@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 var vida
-var cooldown = true
+var cooldown = false
 var agarraTempo
 var target
 var nextAttack
@@ -16,7 +16,8 @@ export var FRICTION = 200
 #se trocar de cenario tem q atualizar essa variavel manualmente
 onready var player = $"../../../Player"
 onready var wanderController = $WanderController
-onready var ani
+onready var animationTree = $AnimationTree
+onready var animationState = animationTree.get("parameters/playback")
 onready var stats = $Stats
 onready var hurtbox = $HurtBox
 onready var timer = $Timer
@@ -30,35 +31,49 @@ enum{
 	LAUNCH
 }
 
+func _ready():
+	animationTree.active = true
+	nextAttack = randi()%3+2
+
 func _process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
 	knockback = move_and_slide(knockback)
 	if Input.is_action_just_pressed("roll"):
 		state = CHASE
-	
+	print(nextAttack)
 	match state:
 		IDLE:#so fica parado
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			if wanderController.get_time_left() == 0:
 				update_wander()
+			animationState.travel("Idle")
+			animationTree.set("parameters/Idle/blend_position", velocity)
 			
 		
 		WANDER:#é apenas o modo wander do morcego, nada demais
+			animationState.travel("Walk")
+			animationTree.set("parameters/Walk/blend_position", velocity)
 			if wanderController.get_time_left() == 0:
 				update_wander()#decide se fica parado ou n
 			accelerate_towards_point(wanderController.target_position, delta)
 			if global_position.distance_to(wanderController.target_position) <= 4:
 				update_wander()#decide se fica parado ou n
 		CHASE:
+			animationState.travel("Walk")
+			animationTree.set("parameters/Walk/blend_position", velocity)
 			target = player.global_position - global_position
 			chase_state(delta)
 		ATTACK:
-			#Imagem: A-Train balofo
-			
+			animationState.travel("Atack")
+			animationTree.set("parameters/Atack/blend_position", velocity)
 			attack_state(delta)
+			
 		LAUNCH:
-			#Imagem: cachorro quente
+			#cachorro quente
+			animationState.travel("Launch")
+			animationTree.set("parameters/Launch/blend_position", target)
 			launch_state(delta)
+			
 	velocity = move_and_slide(velocity)
 
 
@@ -69,39 +84,28 @@ func chase_state(delta):
 	var direction = global_position.direction_to(player.global_position)
 	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 	
-	# 1 = ele se joga // 2 = ele bate
-	if nextAttack == 1 && cooldown == true:
+	# ele se joga //  ele bate
+	if nextAttack > 1 && !cooldown:
 		var distance = global_position.distance_to(player.global_position)
-		#se o ele estiver da distancia certa ele se joga
-		#se não, ele bate
-		if distance <= 80 && distance >= 4 :
-			timer.start(3)
+		if global_position.distance_to(player.global_position) <= 100:
+			timer.start(4)
 			state = LAUNCH
-		else:
-			#bate
-			nextAttack = 2
-	elif global_position.distance_to(player.global_position) <= 4 && cooldown == true:
+	elif nextAttack == 1 && !cooldown:
 		#se estiver perto o suficiente le bate
-		timer.start(3)
-		state = ATTACK
+		if global_position.distance_to(player.global_position) <= 10:
+			timer.start(4)
+			state = ATTACK
 
 func attack_state(delta):
 	#so pra eu saber q ele ta atacando
 	cooldown = false
-	velocity = velocity.move_toward(Vector2.ZERO, FRICTION * 10 * delta)
-	if velocity == Vector2.ZERO:
-		#ja define o proximo ataque
-		nextAttack = randi()%2+1
-		state = CHASE
+	#velocity = velocity.move_toward(Vector2.ZERO, FRICTION * 10 * delta)
+	velocity = Vector2.ZERO
 
 func launch_state(delta):
 	#so pra ver se ta tudo certo
 	cooldown = false
 	velocity = velocity.move_toward(target * MAX_SPEED, ACCELERATION * 2 * delta)
-	if global_position.distance_to(player.global_position) >= 100:
-		#define o proximo ataque
-		nextAttack = randi()%2+1
-		state = CHASE
 
 #vai ate o ponto do wanderControl
 func accelerate_towards_point(point, delta):
@@ -110,13 +114,16 @@ func accelerate_towards_point(point, delta):
 
 #decide se fica parado ou n
 func update_wander():
-	var random = randi()%2+1
+	var random = randi()%3+1
 	if random == 2:
 		state = IDLE
 	else:
 		state = WANDER
 	wanderController.start_wander_timer(rand_range(1,3))
 
+func anim_finish():
+	nextAttack = randi()%2+1
+	state = CHASE
 
 func _on_HurtBox_area_entered(area):
 	stats.health -= area.damage
