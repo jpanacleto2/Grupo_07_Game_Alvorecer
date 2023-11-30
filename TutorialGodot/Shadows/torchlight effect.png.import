@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cogu_mapa1.png-7ce97fef697e113a9a5938d7824c437e.stex"
+path="res://.import/torchlight effect.png-f95f3330c71f9a21b9781abf0acb178c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://World/cogu_mapa1.png"
-dest_files=[ "res://.import/cogu_mapa1.png-7ce97fef697e113a9a5938d7824c437e.stex" ]
+source_file="res://Shadows/torchlight effect.png"
+dest_files=[ "res://.import/torchlight effect.png-f95f3330c71f9a21b9781abf0acb178c.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

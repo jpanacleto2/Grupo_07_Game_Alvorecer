@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Enemies/Bat.gd" type="Script" id=1]
 [ext_resource path="res://Enemies/Bat.png" type="Texture" id=2]
@@ -9,12 +9,8 @@
 [ext_resource path="res://Overlap/HitBox.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Enemies/SoftCollision.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Enemies/WanderController.tscn" type="PackedScene" id=9]
-[ext_resource path="res://WhiteColor.gdshader" type="Shader" id=10]
 
-[sub_resource type="ShaderMaterial" id=14]
-resource_local_to_scene = true
-shader = ExtResource( 10 )
-shader_param/active = true
+[sub_resource type="CanvasItemMaterial" id=16]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -117,10 +113,9 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-material = SubResource( 14 )
+material = SubResource( 16 )
 frames = SubResource( 6 )
 animation = "Idle"
-frame = 4
 playing = true
 offset = Vector2( 0, -12.465 )
 

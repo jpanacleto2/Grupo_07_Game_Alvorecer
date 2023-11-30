@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
@@ -9,11 +9,8 @@
 [ext_resource path="res://Shadows/MediumShadow.png" type="Texture" id=7]
 [ext_resource path="res://Music and Sounds/Swipe.wav" type="AudioStream" id=8]
 [ext_resource path="res://Music and Sounds/Evade.wav" type="AudioStream" id=9]
-[ext_resource path="res://WhiteColor.gdshader" type="Shader" id=10]
 
-[sub_resource type="ShaderMaterial" id=57]
-shader = ExtResource( 10 )
-shader_param/active = true
+[sub_resource type="CanvasItemMaterial" id=61]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
@@ -879,7 +876,7 @@ script = ExtResource( 1 )
 texture = ExtResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 57 )
+material = SubResource( 61 )
 position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 hframes = 60
