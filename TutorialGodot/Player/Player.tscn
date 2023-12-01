@@ -866,7 +866,7 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( 0, -9 )
+position = Vector2( 0, -8 )
 collision_layer = 2
 script = ExtResource( 1 )
 
@@ -883,7 +883,6 @@ hframes = 60
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 rotation = -1.5708
 shape = SubResource( 1 )
 
@@ -917,7 +916,6 @@ parameters/Roll/blend_position = Vector2( 0, 1 )
 parameters/Run/blend_position = Vector2( 0, 1 )
 
 [node name="HitBoxPivot" type="Position2D" parent="."]
-visible = false
 position = Vector2( 0, -4 )
 __meta__ = {
 "_gizmo_extents_": 8.0
