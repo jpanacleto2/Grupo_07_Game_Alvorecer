@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://TILESET-VILLAGE-TOP-DOWN/HOUSE 2 - DAY.png" type="Texture" id=1]
+
+[node name="StaticBody2D" type="StaticBody2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -54, 29, -54, 47, 9, 47, 9, 31, 59, 31, 59, 14, 61, 14, 61, -21, 8, -21, 8, -25, -55, -25, -56, 27, -54, 27 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
