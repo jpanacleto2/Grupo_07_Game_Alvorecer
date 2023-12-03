@@ -685,3 +685,9 @@ texture = ExtResource( 4 )
 position = Vector2( 397, 382 )
 scale = Vector2( 0.611169, 0.692555 )
 texture = ExtResource( 4 )
+
+[node name="Teia4" type="Sprite" parent="."]
+position = Vector2( 532, 333 )
+scale = Vector2( 0.767856, 0.812499 )
+z_index = 3
+texture = ExtResource( 4 )
