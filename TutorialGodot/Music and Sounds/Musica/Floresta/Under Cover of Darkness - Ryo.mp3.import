@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Under Cover of Darkness - Ryo.mp3-7c1221afaafd5b6bf022f3013ebbf526.mp3str"
+
+[deps]
+
+source_file="res://Music and Sounds/Musica/Floresta/Under Cover of Darkness - Ryo.mp3"
+dest_files=[ "res://.import/Under Cover of Darkness - Ryo.mp3-7c1221afaafd5b6bf022f3013ebbf526.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

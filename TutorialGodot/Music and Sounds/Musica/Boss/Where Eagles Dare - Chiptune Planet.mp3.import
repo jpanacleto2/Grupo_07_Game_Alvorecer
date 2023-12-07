@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Where Eagles Dare - Chiptune Planet.mp3-8b70bf0fd023396fb5e3347e4ae42d14.mp3str"
+
+[deps]
+
+source_file="res://Music and Sounds/Musica/Boss/Where Eagles Dare - Chiptune Planet.mp3"
+dest_files=[ "res://.import/Where Eagles Dare - Chiptune Planet.mp3-8b70bf0fd023396fb5e3347e4ae42d14.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

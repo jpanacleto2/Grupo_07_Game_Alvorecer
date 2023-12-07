@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Boa - Duvet - Dietter.mp3-a9066bd9e0c32c3881f0da3c3aee9df1.mp3str"
+
+[deps]
+
+source_file="res://Music and Sounds/Musica/Menu/Boa - Duvet - Dietter.mp3"
+dest_files=[ "res://.import/Boa - Duvet - Dietter.mp3-a9066bd9e0c32c3881f0da3c3aee9df1.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

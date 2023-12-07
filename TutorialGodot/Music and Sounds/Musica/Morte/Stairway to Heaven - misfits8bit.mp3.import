@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Stairway to Heaven - misfits8bit.mp3-e71f13a2fb4c9f7086d66d80c17a45f0.mp3str"
+
+[deps]
+
+source_file="res://Music and Sounds/Musica/Morte/Stairway to Heaven - misfits8bit.mp3"
+dest_files=[ "res://.import/Stairway to Heaven - misfits8bit.mp3-e71f13a2fb4c9f7086d66d80c17a45f0.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

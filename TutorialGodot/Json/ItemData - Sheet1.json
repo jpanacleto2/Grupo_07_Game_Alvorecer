@@ -4,9 +4,12 @@
     "Category": "Weapon",
     "Type": "Sword",
     "EquipmentSlot": "MainHand",
-    "Attack": 20,
-    "Defense": 10,
-    "Block": null,
+    "Attack": 1,
+    "Defense": null,
+    "Block" : null,
+    "Equipado": false,
+    "Usar": 0,
+    "Equipar": 1,
     "PotionHealth": null,
     "PotionMana": null
     
@@ -17,9 +20,12 @@
     "Category": "Weapon",
     "Type": "Sword",
     "EquipmentSlot": "MainHand",
-    "Attack": 60,
+    "Attack": 1.5,
     "Defense": null,
-    "Block": null,
+    "Block" : null,
+    "Equipado": false,
+    "Usar": 0,
+    "Equipar": 1,
     "PotionHealth": null,
     "PotionMana": null
     
@@ -30,9 +36,12 @@
     "Category": "Weapon",
     "Type": "Sword",
     "EquipmentSlot": "MainHand",
-    "Attack": 450,
+    "Attack": 2,
     "Defense": null,
-    "Block": null,
+    "Block" : null,
+    "Equipado": false,
+    "Usar": 0,
+    "Equipar": 1,
     "PotionHealth": null,
     "PotionMana": null
     
@@ -42,9 +51,12 @@
     "Category": "Weapon",
     "Type": "Axe",
     "EquipmentSlot": "MainHand",
-    "Attack": 150,
+    "Attack": 3,
     "Defense": null,
-    "Block": null,
+    "Block" : null,
+    "Equipado": false,
+    "Usar": 0,
+    "Equipar": 1,
     "PotionHealth": null,
     "PotionMana": null
 
@@ -56,7 +68,10 @@
     "EquipmentSlot": "OffHand",
     "Attack": null,
     "Defense": null,
-    "Block": null,
+    "Block" : null,
+    "Equipado": false,
+    "Usar": 1,
+    "Equipar": 0,
     "PotionHealth": 5,
     "PotionMana": 5
     
@@ -68,7 +83,10 @@
     "EquipmentSlot": null,
     "Attack": null,
     "Defense": null,
-    "Block": null,
+    "Equipado": false,
+    "Block" : null,
+    "Usar": 1,
+    "Equipar": 0,
     "PotionHealth": 250,
     "PotionMana": null
     
@@ -78,9 +96,12 @@
     "Category": "Food",
     "Type": "Food",
     "EquipmentSlot": null,
+    "Equipado": false,
     "Attack": null,
     "Defense": null,
-    "Block": null,
+    "Block" : null,
+    "Usar": 1,
+    "Equipar": 0,
     "PotionHealth": null,
     "PotionMana": null
     
@@ -89,12 +110,29 @@
     "Name": "Steel Armor",
     "Category": "Armor",
     "Type": "Armor",
+    "Equipado": false,
     "EquipmentSlot": "Chest",
     "Attack": null,
-    "Defense": 260,
-    "Block": null,
+    "Defense": 1.5,
+    "Block" : null,
+    "Usar": 1,
+    "Equipar": 1,
     "PotionHealth": null,
     "PotionMana": null
     
+  },
+  "10010": {
+    "Name": "Old Armor",
+    "Category": "Armor",
+    "Type": "Armor",
+    "Equipado": false,
+    "EquipmentSlot": "Chest",
+    "Attack": null,
+    "Defense": 1,
+    "Block" : null,
+    "Usar": 1,
+    "Equipar": 1,
+    "PotionHealth": null,
+    "PotionMana": null
   }
 }
