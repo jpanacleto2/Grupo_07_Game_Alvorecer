@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Bush.tscn" type="PackedScene" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://Enemies/Fungo/Fungo.tscn" type="PackedScene" id=13]
 [ext_resource path="res://World/Mapa1.gd" type="Script" id=14]
 [ext_resource path="res://Enemies/Raposa/Raposa.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Inventario/Itens/Item.tscn" type="PackedScene" id=16]
+[ext_resource path="res://CogumeloTela/GreyState.tscn" type="PackedScene" id=17]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -526,12 +528,12 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 2, 8, 0, 196608, 9, 0, 7, 65536, 0, 131
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( -68, -73 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="CameraMan" type="KinematicBody2D" parent="YSort/Player"]
+position = Vector2( -68, -64 )
 script = ExtResource( 12 )
 
 [node name="Camera2D" type="Camera2D" parent="YSort/Player/CameraMan"]
@@ -616,14 +618,13 @@ position = Vector2( 335, 82 )
 
 [node name="AnimatedSprite" parent="YSort/Inimigos/Os morcego/Bat2" index="0"]
 material = SubResource( 51 )
-frame = 0
+frame = 1
 
 [node name="Bat3" parent="YSort/Inimigos/Os morcego" instance=ExtResource( 6 )]
 position = Vector2( -71, 81 )
 
 [node name="AnimatedSprite" parent="YSort/Inimigos/Os morcego/Bat3" index="0"]
 material = SubResource( 50 )
-frame = 1
 
 [node name="Fungos" type="YSort" parent="YSort/Inimigos"]
 position = Vector2( -61, -16 )
@@ -633,6 +634,8 @@ position = Vector2( -4, -70 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="GreyuII" parent="CanvasLayer" instance=ExtResource( 17 )]
+
 [node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 8 )]
 margin_left = 6.0
 margin_top = 6.0
@@ -640,6 +643,10 @@ margin_right = 64.0
 margin_bottom = 17.0
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="Item" parent="." instance=ExtResource( 16 )]
+position = Vector2( -19, -63 )
+id = 10010
 
 [connection signal="segunda_fase" from="YSort/Inimigos/Ferromante" to="." method="_on_Ferromante_segunda_fase"]
 [connection signal="segunda_fase" from="YSort/Inimigos/Ferromante" to="YSort/Player/CameraMan" method="_on_Ferromante_segunda_fase"]
@@ -655,3 +662,4 @@ margin_bottom = 17.0
 [editable path="YSort/Inimigos/Os morcego/Bat3/PlayerDetectionZone"]
 [editable path="YSort/Inimigos/Os morcego/Bat3/HitBox"]
 [editable path="YSort/Inimigos/Os morcego/Bat3/SoftCollision"]
+[editable path="CanvasLayer/GreyuII"]

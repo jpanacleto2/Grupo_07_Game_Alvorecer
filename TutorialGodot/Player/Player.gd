@@ -1,14 +1,17 @@
 extends KinematicBody2D
 
 const PlayerHurtSound = preload("res://Player/PlayerHurtSound.tscn")
+const DeathScreen = preload("res://CogumeloTela/TelaMorte.tscn")
+#const CogumeloTela = preload("res://CogumeloTela/GreyState.tscn")
 
 # O export torna possível alterar o valor de variáveis pelo editor, sem precisar
 # entrar no código e, sobretudo, enquanto o jogo ainda está em execução.
 
-export var ACCELERATION = 500
-export var MAX_SPEED = 80
-export var ROLL_SPEED = 120
-export var FRICTION = 500
+var ACCELERATION = 500
+var MAX_SPEED = 80
+var ROLL_SPEED = 120
+var FRICTION = 500
+
 
 enum {
 	MOVE,
@@ -23,6 +26,9 @@ var velocity = Vector2.ZERO
 var roll_vector = Vector2.DOWN
 var stats = PlayerStats
 var inv_aberto = false
+var greyII = false
+var armadura = 0
+
 
 
 #variável de acesso para animação de correr para os lados
@@ -37,13 +43,21 @@ const inv = preload("res://Inventario/Inventario.tscn")
 func _ready():
 	#randomize()
 	get_tree().current_scene.Player = self
-	#stats.connect("no_health", self, "queue_free")
+	stats.connect("no_health", self, "dead")
 	animationTree.active = true
 	swordHitbox.knockback_vector = roll_vector
+	#yield(get_tree().create_timer(1), "timeout")
+	respawn()
+	
+
 	
 #"main"
 func _physics_process(delta):
-	
+	swordHitbox.damage = 1 + get_tree().current_scene.arma
+	#print("dano: " + str(swordHitbox.damage))
+	armadura = 0 + get_tree().current_scene.armadura
+	#print("armadura: " + str(armadura))
+
 	match state:
 		MOVE:
 			move_state(delta) 
@@ -130,9 +144,28 @@ func roll_animation_finished():
 func attack_animation_finished():
 	state = MOVE
 
+func respawn():
+	animationTree.set("parameters/Respawn/blend_position", input_vector)
+	animationState.travel("Respawn")
+	stats.health = stats.max_health
+	print("AH EU TO COKC")
+
+func dead():
+	get_tree().current_scene.stopMusic()
+	animationTree.set("parameters/Death/blend_position", input_vector)
+	animationState.travel("Death")
+	state = STOP
+
+func dead_screen():
+	var main = $"../../CanvasLayer"
+	var deathInstance = DeathScreen.instance()
+	main.add_child(deathInstance)
 
 func _on_HurtBox_area_entered(area):
-	stats.health -= area.damage
+	var dano = area.damage - armadura
+	if dano < 0:
+		dano = 0
+	stats.health  -= dano
 	hurtbox.start_invincibility(0.6)
 	hurtbox.create_hit_effect()
 	var playerHurtSound = PlayerHurtSound.instance()

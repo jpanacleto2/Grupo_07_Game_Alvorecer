@@ -1,15 +1,16 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=80 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
 [ext_resource path="res://Overlap/HitBox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player/SwordHitbox.gd" type="Script" id=4]
 [ext_resource path="res://Overlap/HurtBox.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Stats.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Player/PlayerStats.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Shadows/MediumShadow.png" type="Texture" id=7]
 [ext_resource path="res://Music and Sounds/Swipe.wav" type="AudioStream" id=8]
 [ext_resource path="res://Music and Sounds/Evade.wav" type="AudioStream" id=9]
 [ext_resource path="res://WhiteColor.gdshader" type="Shader" id=10]
+[ext_resource path="res://Music and Sounds/Ploft [TubeRipper.com].mp3" type="AudioStream" id=12]
 
 [sub_resource type="ShaderMaterial" id=57]
 shader = ExtResource( 10 )
@@ -405,6 +406,74 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="Animation" id=62]
+resource_name = "Morte"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 44, 60 ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": null
+} ],
+"times": PoolRealArray( 0.3 )
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "dead_screen"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HurtBox:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("HurtBox:monitorable")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
 [sub_resource type="Animation" id=2]
 length = 0.001
 tracks/0/type = "value"
@@ -454,6 +523,84 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("HurtBox:monitoring")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("HurtBox:monitorable")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=70]
+resource_name = "Respawn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 44, 3 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HurtBox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HurtBox:monitorable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=44]
@@ -713,6 +860,30 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 13, 14, 15, 16, 17, 12 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("HurtBox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HurtBox:monitorable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "RunRight"
@@ -773,6 +944,29 @@ min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id=63]
+animation = "Morte"
+
+[sub_resource type="AnimationNodeAnimation" id=64]
+animation = "Morte"
+
+[sub_resource type="AnimationNodeAnimation" id=65]
+animation = "Morte"
+
+[sub_resource type="AnimationNodeAnimation" id=66]
+animation = "Morte"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=67]
+blend_point_0/node = SubResource( 63 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 64 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 65 )
+blend_point_2/pos = Vector2( -1, 0 )
+blend_point_3/node = SubResource( 66 )
+blend_point_3/pos = Vector2( 0, -1 )
+blend_mode = 1
+
 [sub_resource type="AnimationNodeAnimation" id=34]
 animation = "IdleUp"
 
@@ -793,6 +987,29 @@ blend_point_1/pos = Vector2( 1, 0 )
 blend_point_2/node = SubResource( 36 )
 blend_point_2/pos = Vector2( 0, 1 )
 blend_point_3/node = SubResource( 37 )
+blend_point_3/pos = Vector2( -1, 0 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=71]
+animation = "Respawn"
+
+[sub_resource type="AnimationNodeAnimation" id=72]
+animation = "Respawn"
+
+[sub_resource type="AnimationNodeAnimation" id=73]
+animation = "Respawn"
+
+[sub_resource type="AnimationNodeAnimation" id=74]
+animation = "Respawn"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=75]
+blend_point_0/node = SubResource( 71 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 72 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 73 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 74 )
 blend_point_3/pos = Vector2( -1, 0 )
 blend_mode = 1
 
@@ -858,16 +1075,28 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=54]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=68]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=69]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=76]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=77]
+
 [sub_resource type="AnimationNodeStateMachine" id=16]
 states/Attack/node = SubResource( 33 )
 states/Attack/position = Vector2( 573, 248 )
+states/Death/node = SubResource( 67 )
+states/Death/position = Vector2( 371, 157 )
 states/Idle/node = SubResource( 38 )
 states/Idle/position = Vector2( 584, 157 )
+states/Respawn/node = SubResource( 75 )
+states/Respawn/position = Vector2( 754, 73.24 )
 states/Roll/node = SubResource( 52 )
 states/Roll/position = Vector2( 584.222, 46.6667 )
 states/Run/node = SubResource( 22 )
 states/Run/position = Vector2( 802, 167 )
-transitions = [ "Idle", "Attack", SubResource( 39 ), "Attack", "Idle", SubResource( 40 ), "Idle", "Run", SubResource( 41 ), "Run", "Idle", SubResource( 42 ), "Roll", "Idle", SubResource( 53 ), "Idle", "Roll", SubResource( 54 ) ]
+transitions = [ "Idle", "Attack", SubResource( 39 ), "Attack", "Idle", SubResource( 40 ), "Idle", "Run", SubResource( 41 ), "Run", "Idle", SubResource( 42 ), "Roll", "Idle", SubResource( 53 ), "Idle", "Roll", SubResource( 54 ), "Death", "Idle", SubResource( 68 ), "Idle", "Death", SubResource( 69 ), "Respawn", "Idle", SubResource( 76 ), "Idle", "Respawn", SubResource( 77 ) ]
 start_node = "Idle"
 graph_offset = Vector2( 91, 21.24 )
 
@@ -933,8 +1162,6 @@ position = Vector2( 0, -9 )
 collision_layer = 2
 script = ExtResource( 1 )
 
-[node name="Stats" parent="." instance=ExtResource( 6 )]
-
 [node name="ShadowSprite" type="Sprite" parent="."]
 texture = ExtResource( 7 )
 
@@ -942,7 +1169,7 @@ texture = ExtResource( 7 )
 material = SubResource( 57 )
 position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
-hframes = 60
+hframes = 61
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -959,7 +1186,9 @@ anims/IdleDown = SubResource( 10 )
 anims/IdleLeft = SubResource( 9 )
 anims/IdleRight = SubResource( 7 )
 anims/IdleUp = SubResource( 8 )
+anims/Morte = SubResource( 62 )
 anims/RESET = SubResource( 2 )
+anims/Respawn = SubResource( 70 )
 anims/RollDown = SubResource( 44 )
 anims/RollLeft = SubResource( 45 )
 anims/RollRight = SubResource( 46 )
@@ -975,7 +1204,9 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 17 )
 parameters/Attack/blend_position = Vector2( 0, 1 )
+parameters/Death/blend_position = Vector2( 0, 0 )
 parameters/Idle/blend_position = Vector2( 0, 1 )
+parameters/Respawn/blend_position = Vector2( 0, 0 )
 parameters/Roll/blend_position = Vector2( 0, 1 )
 parameters/Run/blend_position = Vector2( 0, 1 )
 
@@ -999,10 +1230,12 @@ visible = false
 shape = SubResource( 43 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 9 )
+stream = ExtResource( 12 )
 
 [node name="HurtBox" parent="." instance=ExtResource( 5 )]
 collision_layer = 4
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2( 0, -2 )
@@ -1013,6 +1246,9 @@ autoplay = "stop"
 anims/RESET = SubResource( 60 )
 anims/start = SubResource( 58 )
 anims/stop = SubResource( 59 )
+
+[node name="PlayerStats" parent="." instance=ExtResource( 6 )]
+max_health = 6
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="invincibility_ended" from="HurtBox" to="." method="_on_HurtBox_invincibility_ended"]
