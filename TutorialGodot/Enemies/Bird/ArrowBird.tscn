@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Enemies/Bat.png" type="Texture" id=1]
 [ext_resource path="res://Shadows/SmallShadow.png" type="Texture" id=2]
 [ext_resource path="res://Enemies/Bird/ArrowBird.gd" type="Script" id=3]
+[ext_resource path="res://Overlap/HitBox.tscn" type="PackedScene" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -42,22 +43,23 @@ script = ExtResource( 3 )
 [node name="MainSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
 animation = "Fly"
-frame = 3
+frame = 4
 playing = true
 offset = Vector2( 0, -12 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
-[node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2( 1, -15 )
-shape = SubResource( 7 )
-
 [node name="LifeTime" type="Timer" parent="."]
 autostart = true
 
+[node name="HitBox" parent="." instance=ExtResource( 4 )]
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2( 1, -15 )
+shape = SubResource( 7 )
+
 [connection signal="timeout" from="LifeTime" to="." method="_on_Timer_timeout"]
+
+[editable path="HitBox"]

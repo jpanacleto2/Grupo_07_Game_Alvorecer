@@ -40,7 +40,7 @@ func _process(delta):
 	knockback = move_and_slide(knockback)
 	if Input.is_action_just_pressed("roll"):
 		state = CHASE
-	print(nextAttack)
+	#print(nextAttack)
 	match state:
 		IDLE:#so fica parado
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)

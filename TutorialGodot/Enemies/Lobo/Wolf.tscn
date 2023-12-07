@@ -93,7 +93,6 @@ max_health = 2
 position = Vector2( -4.76837e-07, 0 )
 scale = Vector2( 0.65625, 0.625 )
 frames = SubResource( 13 )
-frame = 4
 playing = true
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]

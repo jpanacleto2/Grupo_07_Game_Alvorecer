@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://CogumeloTela/Codigo Morte/Desisitir.gd" type="Script" id=1]
+[ext_resource path="res://CogumeloTela/Desisitir.png" type="Texture" id=2]
+[ext_resource path="res://CogumeloTela/Continuar.png" type="Texture" id=3]
+[ext_resource path="res://CogumeloTela/MorteTela.png" type="Texture" id=4]
+[ext_resource path="res://CogumeloTela/Codigo Morte/Continuar.gd" type="Script" id=5]
+
+[node name="TelaMorte" type="Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Tela de fundo" type="TextureRect" parent="."]
+margin_right = 1282.0
+margin_bottom = 718.0
+rect_scale = Vector2( 0.252, 0.254 )
+texture = ExtResource( 4 )
+
+[node name="Desisitir" type="TextureRect" parent="."]
+margin_left = 131.0
+margin_top = 129.0
+margin_right = 625.0
+margin_bottom = 281.0
+rect_scale = Vector2( 0.15, 0.15 )
+mouse_default_cursor_shape = 2
+texture = ExtResource( 2 )
+stretch_mode = 1
+script = ExtResource( 1 )
+
+[node name="Continuar" type="TextureRect" parent="."]
+margin_left = 131.0
+margin_top = 93.0
+margin_right = 625.0
+margin_bottom = 245.0
+rect_scale = Vector2( 0.15, 0.15 )
+mouse_default_cursor_shape = 2
+texture = ExtResource( 3 )
+script = ExtResource( 5 )

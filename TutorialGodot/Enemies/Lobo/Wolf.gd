@@ -76,11 +76,15 @@ func _on_HurtBox_area_entered(area):
 		emit_signal("enemy_killed")
 		if is_instance_valid(Ferromante):
 			Ferromante.contagem_lobos -= 1
-		#FerromanteNode.slashEffect()
-		get_tree().current_scene.wolfs[ID] = null
+		var wolfs = get_tree().current_scene.wolfs
+		if wolfs != null && wolfs.size() >= ID && wolfs[ID] != null:
+			get_tree().current_scene.wolfs[ID] = null
 		queue_free()
 	else:
 		hitEffect()
+		
+
+	
 
 
 
