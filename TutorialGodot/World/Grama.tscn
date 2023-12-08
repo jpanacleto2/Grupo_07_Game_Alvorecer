@@ -21,7 +21,6 @@ offset = Vector2( -15.933, -15.421 )
 
 [node name="HurtBox" parent="." instance=ExtResource( 3 )]
 collision_layer = 8
-show_hit = false
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 rotation = 1.5708

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Caverna.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -13,6 +13,8 @@
 
 [sub_resource type="CanvasItemMaterial" id=310]
 light_mode = 2
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=315]
 
 [sub_resource type="CanvasItemMaterial" id=311]
 
@@ -703,6 +705,9 @@ __meta__ = {
 "_edit_group_": true
 }
 
+[node name="AnimationTree" parent="YSort/Player" index="5"]
+parameters/playback = SubResource( 315 )
+
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
 remote_path = NodePath("../../../Camera2D")
 
@@ -767,3 +772,6 @@ margin_bottom = 17.0
 [connection signal="timeout" from="CogumeloTimer" to="." method="_on_CogumeloTimer_timeout"]
 
 [editable path="Camera2D"]
+[editable path="YSort/Player"]
+[editable path="YSort/Player/HitBoxPivot/SwordHitbox"]
+[editable path="YSort/Player/HurtBox"]

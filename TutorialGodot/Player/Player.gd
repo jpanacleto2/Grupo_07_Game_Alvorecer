@@ -121,3 +121,7 @@ func _on_HurtBox_invincibility_started():
 func _on_HurtBox_invincibility_ended():
 	blinkAnimationPlayer.play("stop")
 	
+
+
+func _on_Player_mudou_de_cena(cena):
+	pass # Replace with function body.

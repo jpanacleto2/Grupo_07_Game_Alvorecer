@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://World/Tree.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Igreja.tscn" type="PackedScene" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://World/Bush.tscn" type="PackedScene" id=8]
 [ext_resource path="res://World/GrassBackground.png" type="Texture" id=9]
 [ext_resource path="res://World/CliffTileset.png" type="Texture" id=10]
-[ext_resource path="res://Buraco_caverna.gd" type="Script" id=11]
 [ext_resource path="res://SpriteBuraco.png" type="Texture" id=12]
 [ext_resource path="res://World/Grama.tscn" type="PackedScene" id=13]
 [ext_resource path="res://World/Cerca.tscn" type="PackedScene" id=14]
@@ -21,6 +20,7 @@
 [ext_resource path="res://TILESET-VILLAGE-TOP-DOWN/WATER TILE - DAY.png" type="Texture" id=19]
 [ext_resource path="res://World/Ponte.tscn" type="PackedScene" id=20]
 [ext_resource path="res://World/Água.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Cenário 1.gd" type="Script" id=22]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -497,11 +497,14 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/z_index = 0
 
 [sub_resource type="CapsuleShape2D" id=50]
-radius = 8.0
-height = 16.0
+radius = 9.0
+height = 14.0
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=51]
 
 [node name="World" type="Node2D"]
 position = Vector2( -150, 34 )
+script = ExtResource( 22 )
 
 [node name="Background" type="Sprite" parent="."]
 show_behind_parent = true
@@ -531,23 +534,16 @@ limit_top = -5000
 limit_right = 5000
 limit_bottom = 5000
 
-[node name="WaterTile-Day" type="Sprite" parent="."]
-position = Vector2( 873.586, 39.8791 )
-scale = Vector2( 1.19828, 3.76511 )
-texture = ExtResource( 19 )
+[node name="BuracoCaverna" type="Area2D" parent="."]
+position = Vector2( 0, -1 )
 
-[node name="Buraco_caverna" type="Area2D" parent="."]
-collision_mask = 3
-script = ExtResource( 11 )
-
-[node name="SpriteBuraco" type="Sprite" parent="Buraco_caverna"]
-show_behind_parent = true
-position = Vector2( 1305, 48 )
-scale = Vector2( 1.90624, 2 )
+[node name="SpriteBuraco" type="Sprite" parent="BuracoCaverna"]
+position = Vector2( 1306.13, 48.125 )
+scale = Vector2( 1.64062, 2.26563 )
 texture = ExtResource( 12 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Buraco_caverna"]
-position = Vector2( 1305, 48 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuracoCaverna"]
+position = Vector2( 1306.13, 48.125 )
 shape = SubResource( 50 )
 
 [node name="YSort" type="YSort" parent="."]
@@ -557,6 +553,9 @@ position = Vector2( -446, 81 )
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="AnimationTree" parent="YSort/Player" index="5"]
+parameters/playback = SubResource( 51 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
 remote_path = NodePath("../../../Camera2D")
@@ -773,71 +772,78 @@ position = Vector2( 1242, 40 )
 [node name="Grama27" parent="YSort/Gramas" instance=ExtResource( 13 )]
 position = Vector2( 1307, 41 )
 
-[node name="Igreja" parent="YSort" instance=ExtResource( 2 )]
+[node name="Construções" type="YSort" parent="YSort"]
+
+[node name="Igreja" parent="YSort/Construções" instance=ExtResource( 2 )]
 position = Vector2( -477, -72 )
 
-[node name="StaticBody2D" parent="YSort" instance=ExtResource( 14 )]
+[node name="StaticBody2D" parent="YSort/Construções" instance=ExtResource( 14 )]
 position = Vector2( -546, -46 )
 
-[node name="StaticBody2D2" parent="YSort" instance=ExtResource( 14 )]
+[node name="StaticBody2D2" parent="YSort/Construções" instance=ExtResource( 14 )]
 position = Vector2( -561, -46 )
 
-[node name="StaticBody2D4" parent="YSort" instance=ExtResource( 15 )]
+[node name="StaticBody2D4" parent="YSort/Construções" instance=ExtResource( 15 )]
 position = Vector2( -398, -52 )
 scale = Vector2( 0.896552, 1.01005 )
 
-[node name="StaticBody2D3" parent="YSort" instance=ExtResource( 16 )]
+[node name="StaticBody2D3" parent="YSort/Construções" instance=ExtResource( 16 )]
 position = Vector2( -603, -76 )
 
-[node name="StaticBody2D5" parent="YSort" instance=ExtResource( 18 )]
+[node name="StaticBody2D5" parent="YSort/Construções" instance=ExtResource( 18 )]
 position = Vector2( -318, -65 )
 
-[node name="StaticBody2D6" parent="YSort" instance=ExtResource( 17 )]
+[node name="StaticBody2D6" parent="YSort/Construções" instance=ExtResource( 17 )]
 position = Vector2( -669, -47 )
 
-[node name="StaticBody2D7" parent="YSort" instance=ExtResource( 14 )]
+[node name="StaticBody2D7" parent="YSort/Construções" instance=ExtResource( 14 )]
 position = Vector2( -644, -46 )
 
-[node name="StaticBody2D8" parent="YSort" instance=ExtResource( 14 )]
+[node name="StaticBody2D8" parent="YSort/Construções" instance=ExtResource( 14 )]
 position = Vector2( -694, -46 )
 
-[node name="StaticBody2D9" parent="YSort" instance=ExtResource( 20 )]
+[node name="StaticBody2D9" parent="YSort/Construções" instance=ExtResource( 20 )]
 position = Vector2( 893, 38 )
 
-[node name="StaticBody2D10" parent="YSort" instance=ExtResource( 21 )]
+[node name="StaticBody2D10" parent="YSort/Construções" instance=ExtResource( 21 )]
 show_behind_parent = true
 position = Vector2( 878, 7 )
 
-[node name="StaticBody2D11" parent="YSort" instance=ExtResource( 21 )]
+[node name="StaticBody2D11" parent="YSort/Construções" instance=ExtResource( 21 )]
 show_behind_parent = true
 position = Vector2( 901, 7 )
 
-[node name="StaticBody2D14" parent="YSort" instance=ExtResource( 21 )]
+[node name="StaticBody2D14" parent="YSort/Construções" instance=ExtResource( 21 )]
 show_behind_parent = true
 position = Vector2( 876, 73 )
 
-[node name="StaticBody2D15" parent="YSort" instance=ExtResource( 21 )]
+[node name="StaticBody2D15" parent="YSort/Construções" instance=ExtResource( 21 )]
 show_behind_parent = true
 position = Vector2( 903, 73 )
 
-[node name="StaticBody2D20" parent="YSort" instance=ExtResource( 21 )]
+[node name="StaticBody2D20" parent="YSort/Construções" instance=ExtResource( 21 )]
 show_behind_parent = true
 position = Vector2( 906, 12 )
 
-[node name="StaticBody2D22" parent="YSort" instance=ExtResource( 21 )]
+[node name="StaticBody2D22" parent="YSort/Construções" instance=ExtResource( 21 )]
 show_behind_parent = true
 position = Vector2( 906, 66 )
 
-[node name="WaterTile-Day" type="Sprite" parent="YSort"]
+[node name="WaterTile-Day" type="Sprite" parent="YSort/Construções"]
 show_behind_parent = true
 position = Vector2( 875, 42 )
 scale = Vector2( 1, 4.1875 )
 texture = ExtResource( 19 )
 
-[node name="WaterTile-Day2" type="Sprite" parent="YSort"]
+[node name="WaterTile-Day2" type="Sprite" parent="YSort/Construções"]
 show_behind_parent = true
 position = Vector2( 906, 44 )
 scale = Vector2( 2.875, 3.25 )
+texture = ExtResource( 19 )
+
+[node name="WaterTile-Day3" type="Sprite" parent="YSort/Construções"]
+position = Vector2( 873.586, 39.8791 )
+scale = Vector2( 1.19828, 3.76511 )
 texture = ExtResource( 19 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -848,7 +854,10 @@ margin_top = 6.0
 margin_right = 64.0
 margin_bottom = 17.0
 
-[connection signal="area_entered" from="Buraco_caverna" to="Buraco_caverna" method="_on_Buraco_caverna_area_entered"]
-[connection signal="area_exited" from="Buraco_caverna" to="Buraco_caverna" method="_on_Buraco_caverna_area_exited"]
+[connection signal="body_entered" from="BuracoCaverna" to="." method="_on_BuracoCaverna_body_entered"]
+[connection signal="animation_finished" from="YSort/Player/CanvasLayer/FadeAnimation" to="." method="_on_FadeAnimation_animation_finished"]
 
 [editable path="Camera2D"]
+[editable path="YSort/Player"]
+[editable path="YSort/Player/HitBoxPivot/SwordHitbox"]
+[editable path="YSort/Player/HurtBox"]
