@@ -116,6 +116,7 @@ __meta__ = {
 material = SubResource( 16 )
 frames = SubResource( 6 )
 animation = "Idle"
+frame = 2
 playing = true
 offset = Vector2( 0, -12.465 )
 

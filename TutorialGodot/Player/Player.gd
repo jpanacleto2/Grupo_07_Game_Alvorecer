@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal comeu_cogumelo
+
 const PlayerHurtSound = preload("res://Player/PlayerHurtSound.tscn")
 
 # O export torna possível alterar o valor de variáveis pelo editor, sem precisar
@@ -20,6 +22,7 @@ var state = MOVE
 var velocity = Vector2.ZERO
 var roll_vector = Vector2.DOWN
 var stats = PlayerStats
+var comeu_cogumelo = false
 
 #variável de acesso para animação de correr para os lados
 onready var animationPlayer = $AnimationPlayer
@@ -50,7 +53,10 @@ func _physics_process(delta):
 	
 	velocity = move_and_slide(velocity)
 	
-
+	# Código que se ativa assim que o jogador come o cogumelo (Letra "Q" pra ativar)
+	if Input.is_action_just_pressed("eat_mushroom"):
+		emit_signal("comeu_cogumelo")
+		
 func move_state(delta): 
 	
 	var input_vector = Vector2.ZERO
@@ -102,7 +108,6 @@ func roll_animation_finished():
 func attack_animation_finished():
 	state = MOVE
 
-
 func _on_HurtBox_area_entered(area):
 	stats.health -= area.damage
 	hurtbox.start_invincibility(0.6)
@@ -110,10 +115,9 @@ func _on_HurtBox_area_entered(area):
 	var playerHurtSound = PlayerHurtSound.instance()
 	get_tree().current_scene.add_child(playerHurtSound)
 
-
 func _on_HurtBox_invincibility_started():
 	blinkAnimationPlayer.play("start")
 
-
 func _on_HurtBox_invincibility_ended():
 	blinkAnimationPlayer.play("stop")
+	
