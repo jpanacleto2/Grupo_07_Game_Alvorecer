@@ -18,6 +18,13 @@ func _gui_input(event):
 			#get_parent().queue_free()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+
+
+func _on_Continuar_mouse_entered():
+	rect_size += Vector2(50,50)
+	rect_global_position += Vector2(-4, -4)
+
+
+func _on_Continuar_mouse_exited():
+	rect_size -= Vector2(50,50)
+	rect_global_position -= Vector2(-4, -4)
