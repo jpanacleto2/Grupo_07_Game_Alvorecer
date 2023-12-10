@@ -20,25 +20,28 @@ func _ready():
 func _gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
-			slot = get_parent().slot
-			var item_instance = item.instance()
-			var item = PlayerData.inv_data[slot]["Item"]
-			item_instance.id = item
-			
-			if GameData.item_data[str(item)]["Equipado"] == true:
-				if GameData.item_data[str(item)]["Category"] == "Weapon":
-					main.arma = 0
-				else:
-					main.armadura = 0
-			
-			GameData.item_data[str(item)]["Equipado"] = false
-			main.add_child(item_instance)
-			item_instance.global_position = main.Player.global_position
-			item_instance.expulso()
-			PlayerData.inv_data[slot]["Item"] = null
-			inventario.descartar(quadradinho)
-			inventario.atualiza()
-			#get_parent().get_parent().get_parent().get_parent().queue_free()
-			
-			get_parent().queue_free()
+			funcao()
 
+func funcao():
+	slot = get_parent().slot
+	var item_instance = item.instance()
+	var item = PlayerData.inv_data[slot]["Item"]
+	item_instance.id = item
+			
+	if GameData.item_data[str(item)]["Equipado"] == true:
+		if GameData.item_data[str(item)]["Category"] == "Weapon":
+			main.arma = 0
+		else:
+			main.armadura = 0
+	
+	GameData.item_data[str(item)]["Equipado"] = false
+	main.add_child(item_instance)
+	item_instance.global_position = main.Player.global_position
+	item_instance.expulso()
+	PlayerData.inv_data[slot]["Item"] = null
+	inventario.descartar(quadradinho)
+	inventario.atualiza()
+	#get_parent().get_parent().get_parent().get_parent().queue_free()
+			
+	get_parent().queue_free()
+	

@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Inventario/InvSlot/Inv1Slot.gd" type="Script" id=1]
 [ext_resource path="res://Inventario/Slot.png" type="Texture" id=2]
+[ext_resource path="res://Inventario/InvSlot/Borda.gd" type="Script" id=3]
+[ext_resource path="res://Inventario/SlotSelecionado.png" type="Texture" id=4]
 
 [node name="Inv1" type="TextureRect"]
 margin_right = 21.0
@@ -21,6 +23,15 @@ margin_right = 17.0
 margin_bottom = 17.0
 expand = true
 script = ExtResource( 1 )
+
+[node name="Borda" type="TextureRect" parent="."]
+visible = false
+margin_right = 56.0
+margin_bottom = 56.0
+rect_scale = Vector2( 0.352, 0.353 )
+mouse_filter = 2
+texture = ExtResource( 4 )
+script = ExtResource( 3 )
 
 [connection signal="mouse_entered" from="Slot" to="Slot" method="_on_Item_mouse_entered"]
 [connection signal="mouse_exited" from="Slot" to="Slot" method="_on_Item_mouse_exited"]

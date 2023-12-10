@@ -2,27 +2,39 @@ extends TextureRect
 
 onready var tool_tip = preload("res://Inventario/ToolTip/ToolTip2.tscn")
 onready var click = preload("res://Inventario/Click/Click.tscn")
+onready var borda = $"../Borda"
 onready var inv_slot = get_parent().get_name()
 var place_holder
+var select
 
 #se clicar no item
 func _gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and Input.is_action_just_released("Click") and PlayerData.inv_data[inv_slot]["Item"] != null:
-			#cria o menu de opçoes
-			var click_instance = click.instance()
-			click_instance.origin = "Inventory"
-			click_instance.slot = get_parent().get_name()
-			
-			#define a posição do menu
-			click_instance.rect_position = rect_global_position + Vector2(-10,10)
-			add_child(click_instance)
-			
-			
-			#verificar se o node existe deixa ele visivel
-			if has_node("C"):
-				get_node("C").show()
+			cria_Menu()
 
+
+func cria_Menu():
+	#cria o menu de opçoes
+	var click_instance = click.instance()
+	click_instance.origin = "Inventory"
+	click_instance.slot = get_parent().get_name()
+	
+	#define a posição do menu
+	click_instance.rect_position = rect_global_position + Vector2(-10,10)
+	add_child(click_instance)
+		
+			
+	#verificar se o node existe deixa ele visivel
+	if has_node("C"):
+		get_node("C").show()
+
+
+func _process(delta):
+	if select:
+		borda.visible = true
+	else:
+		borda.visible = false
 
 
 func get_drag_data(position):

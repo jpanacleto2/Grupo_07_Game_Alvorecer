@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Inventario/Click/Click.png" type="Texture" id=1]
 [ext_resource path="res://Fonte/poco/Poco.ttf" type="DynamicFontData" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Inventario/Click/Usar.gd" type="Script" id=5]
 [ext_resource path="res://Inventario/Click/Equipar.gd" type="Script" id=6]
 [ext_resource path="res://Inventario/Click/Sair.gd" type="Script" id=7]
+[ext_resource path="res://Inventario/Click/ClickSelecionado.png" type="Texture" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 10
@@ -21,7 +22,6 @@ size = 10
 font_data = ExtResource( 2 )
 
 [node name="C" type="Popup"]
-visible = true
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
@@ -83,6 +83,15 @@ margin_bottom = 4.0
 mouse_default_cursor_shape = 2
 script = ExtResource( 5 )
 
+[node name="Select" type="TextureRect" parent="Usar"]
+visible = false
+margin_left = -0.414
+margin_top = -1.607
+margin_right = 250.586
+margin_bottom = 80.393
+rect_scale = Vector2( 0.205, 0.205 )
+texture = ExtResource( 8 )
+
 [node name="Descartar" type="TextureRect" parent="."]
 margin_left = -13.0
 margin_top = 8.0
@@ -91,6 +100,15 @@ margin_bottom = 20.0
 mouse_default_cursor_shape = 2
 script = ExtResource( 4 )
 
+[node name="Select" type="TextureRect" parent="Descartar"]
+visible = false
+margin_left = -0.414
+margin_top = -1.997
+margin_right = 250.586
+margin_bottom = 80.003
+rect_scale = Vector2( 0.205, 0.205 )
+texture = ExtResource( 8 )
+
 [node name="Equipar" type="TextureRect" parent="."]
 margin_left = -13.0
 margin_top = 25.0
@@ -98,3 +116,12 @@ margin_right = 38.0
 margin_bottom = 37.0
 mouse_default_cursor_shape = 2
 script = ExtResource( 6 )
+
+[node name="Select" type="TextureRect" parent="Equipar"]
+visible = false
+margin_left = -0.414
+margin_top = -2.607
+margin_right = 250.586
+margin_bottom = 79.393
+rect_scale = Vector2( 0.205, 0.205 )
+texture = ExtResource( 8 )

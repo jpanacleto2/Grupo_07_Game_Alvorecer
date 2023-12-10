@@ -1,6 +1,8 @@
 extends Control
 
 var template_inv_slot = preload("res://Inventario/InvSlot/InvSlot.tscn")
+var posSelect = null
+var podeSelect = true
 
 onready var gridcontainer = $Background/M/GridContainer
 
@@ -32,6 +34,56 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("Abrir_Inv"):
 		queue_free()
+		
+	if Input.is_action_just_pressed("Select") && PlayerData.inv_data["Inv" + str(posSelect)]["Item"] != null:
+		if podeSelect:
+			podeSelect = false
+			get_node("Background/M/GridContainer/Inv" + str(posSelect)).get_node("Item").cria_Menu()
+		else:
+			podeSelect = true
+	
+	if Input.is_action_just_pressed("Select_Right") && podeSelect:
+		if posSelect == null:
+			posSelect = 1
+			#PlayerData.inv_data["Inv" + posSelect]["Item"]
+			get_node("Background/M/GridContainer/Inv" + str(posSelect)).get_node("Item").select = true
+		else: 
+			if posSelect + 1 < 30:
+				get_node("Background/M/GridContainer/Inv" + str(posSelect)).get_node("Item").select = false
+				posSelect += 1
+				get_node("Background/M/GridContainer/Inv" + str(posSelect)).get_node("Item").select = true
+	
+	if Input.is_action_just_pressed("Select_Left") && podeSelect:
+		if posSelect == null:
+			posSelect = 1
+			#PlayerData.inv_data["Inv" + posSelect]["Item"]
+			get_node("Background/M/GridContainer/Inv" + str(posSelect)).get_node("Item").select = true
+		else: 
+			if posSelect - 1 > 0:
+				get_node("Background/M/GridContainer/Inv" + str(posSelect)).get_node("Item").select = false
+				posSelect -= 1
+				get_node("Background/M/GridContainer/Inv" + str(posSelect)).get_node("Item").select = true
+	if Input.is_action_just_pressed("Select_Down") && podeSelect:
+		if posSelect == null:
+			posSelect = 1
+			#PlayerData.inv_data["Inv" + posSelect]["Item"]
+			get_node("Background/M/GridContainer/Inv" + str(posSelect)).get_node("Item").select = true
+		else: 
+			if posSelect + 8 < 30:
+				get_node("Background/M/GridContainer/Inv" + str(posSelect)).get_node("Item").select = false
+				posSelect += 8
+				get_node("Background/M/GridContainer/Inv" + str(posSelect)).get_node("Item").select = true
+	if Input.is_action_just_pressed("Select_Up") && podeSelect:
+		if posSelect == null:
+			posSelect = 1
+			#PlayerData.inv_data["Inv" + posSelect]["Item"]
+			get_node("Background/M/GridContainer/Inv" + str(posSelect)).get_node("Item").select = true
+		else: 
+			if posSelect - 8 > 0:
+				get_node("Background/M/GridContainer/Inv" + str(posSelect)).get_node("Item").select = false
+				posSelect -= 8
+				get_node("Background/M/GridContainer/Inv" + str(posSelect)).get_node("Item").select = true
+			
 
 func equipar(quadrinho, tipo):
 	var categoria
