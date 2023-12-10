@@ -21,7 +21,7 @@ onready var Grey
 func _process(delta):
 	if !tocando:
 		musica = MusicaAmbiente.instance()
-		add_child(musica)
+		#add_child(musica)
 		tocando = true
 
 
@@ -36,5 +36,5 @@ func _on_Ferromante_segunda_fase():
 	for i in range(0, wolfs.size(), 1):
 		if wolfs[i] != null:
 			wolfs[i].queue_free()
-	wolfs = null
-	wolfs = Array()
+#	wolfs = null
+#	wolfs = Array()

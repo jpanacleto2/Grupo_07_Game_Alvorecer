@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 const PlayerHurtSound = preload("res://Player/PlayerHurtSound.tscn")
 const DeathScreen = preload("res://CogumeloTela/TelaMorte.tscn")
+var Morte = false
 #const CogumeloTela = preload("res://CogumeloTela/GreyState.tscn")
 
 # O export torna possível alterar o valor de variáveis pelo editor, sem precisar
@@ -152,14 +153,19 @@ func respawn():
 
 func dead():
 	get_tree().current_scene.stopMusic()
+	get_tree().current_scene.armadura = 0
+	get_tree().current_scene.arma = 0
+	get_tree().current_scene.equipado = false
 	animationTree.set("parameters/Death/blend_position", input_vector)
 	animationState.travel("Death")
 	state = STOP
 
 func dead_screen():
-	var main = $"../../CanvasLayer"
-	var deathInstance = DeathScreen.instance()
-	main.add_child(deathInstance)
+	if Morte == false:
+		var main = $"../../CanvasLayer"
+		var deathInstance = DeathScreen.instance()
+		main.add_child(deathInstance)
+		Morte = true
 
 func _on_HurtBox_area_entered(area):
 	var dano = area.damage - armadura
