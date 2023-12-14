@@ -122,7 +122,8 @@ func _on_Item_mouse_entered():
 	
 	#tool_tip_instance.rect_position = get_parent().get_global_transform_with_canvas().origin - Vector2(100,0)
 	tool_tip_instance.rect_position.y = get_parent().get_global_transform_with_canvas().origin.y
-	tool_tip_instance.rect_position.x = get_node("/root/World" + "/CanvasLayer/Inventario").get_global_transform_with_canvas().origin.x -53
+	var main = get_tree().current_scene
+	tool_tip_instance.rect_position.x = main.get_node("CanvasLayer/Inventario").get_global_transform_with_canvas().origin.x -53
 	
 	add_child(tool_tip_instance)
 	yield(get_tree().create_timer(0.35), "timeout")
