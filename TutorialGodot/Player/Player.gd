@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal comeu_cogumelo
+
 const PlayerHurtSound = preload("res://Player/PlayerHurtSound.tscn")
 const DeathScreen = preload("res://CogumeloTela/TelaMorte.tscn")
 var Morte = false
@@ -43,6 +45,7 @@ const inv = preload("res://Inventario/Inventario.tscn")
 
 func _ready():
 	#randomize()
+	#print (get_tree().current_scene)
 	get_tree().current_scene.Player = self
 	stats.connect("no_health", self, "dead")
 	animationTree.active = true
@@ -54,10 +57,14 @@ func _ready():
 	
 #"main"
 func _physics_process(delta):
+	#atualiza a defesa e o ataque do jogador
 	swordHitbox.damage = 1 + get_tree().current_scene.arma
-	#print("dano: " + str(swordHitbox.damage))
 	armadura = 0 + get_tree().current_scene.armadura
-	#print("armadura: " + str(armadura))
+	
+	
+	# Código que se ativa assim que o jogador come o cogumelo (Letra "Q" pra ativar)
+	if greyII:
+		emit_signal("comeu_cogumelo")
 
 	match state:
 		MOVE:
@@ -86,12 +93,13 @@ func _physics_process(delta):
 	elif Input.is_action_just_pressed("Abrir_Inv"):
 		inv_aberto = false
 		
-	if inv_aberto == false && get_node("/root/World/CanvasLayer/Inventario") != null:
-		get_node("/root/World/CanvasLayer/Inventario").free()
-	elif inv_aberto == true && get_node("/root/World/CanvasLayer/Inventario") == null: 
+	var main = get_tree().current_scene
+	if inv_aberto == false && main.get_node("/CanvasLayer/Inventario") != null:
+		main.get_node("CanvasLayer/Inventario").free()
+	elif inv_aberto == true && main.get_node("CanvasLayer/Inventario") == null: 
 		var inventario = inv.instance()
-		var main = $"../../CanvasLayer"
-		main.add_child(inventario)
+		var canvas = $"../../CanvasLayer"
+		canvas.add_child(inventario)
 		inv_aberto = true
 	
 
@@ -149,7 +157,6 @@ func respawn():
 	animationTree.set("parameters/Respawn/blend_position", input_vector)
 	animationState.travel("Respawn")
 	stats.health = stats.max_health
-	print("AH EU TO COKC")
 
 func dead():
 	get_tree().current_scene.stopMusic()
