@@ -18,8 +18,8 @@ onready var hitbox = $Position2D/HitBox
 onready var timer = $Timer
 onready var stats = $Stats
 onready var animationState = animationTree.get("parameters/playback")
-onready var state = IDLE
-#se trocar o cenario tem q atualizar aqui
+
+
 onready var player = get_tree().current_scene.Player
 
 onready var teleporte = Vector2.ZERO
@@ -44,6 +44,8 @@ enum{
 	DODGE
 }
 
+var state = IDLE
+
 func _ready():
 	get_tree().current_scene.Ferromante = self
 	animationTree.active = true
@@ -53,6 +55,7 @@ func _ready():
 
 
 func _physics_process(delta):
+	player = get_tree().current_scene.Player
 	if is_instance_valid(player):
 		match state:
 			IDLE:
@@ -318,12 +321,13 @@ func slashEffect():
 	hitbox.SlashEffect()
 
 func iniciar_segunda_fase():
-	var main = get_node("/root/World/YSort/Inimigos")
+	var sala = get_tree().current_scene
+	var main = sala.get_node("YSort")
 	var Verdadeiro = load("res://Enemies/Bosses/Ferromante/Ferromante.tscn")
 	var verdadeiro = Verdadeiro.instance()
 	verdadeiro.segundaFase = 2
 	main.add_child(verdadeiro)
-	verdadeiro.global_position = Vector2(271, 519)
+	verdadeiro.global_position = Vector2(271, 450)
 	verdadeiro.stats.set_health(stats.max_health/2)
 	
 

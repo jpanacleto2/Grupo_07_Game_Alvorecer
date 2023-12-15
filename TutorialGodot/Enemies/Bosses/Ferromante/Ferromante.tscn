@@ -1599,7 +1599,6 @@ anims/WalkFront = SubResource( 66 )
 anims/attack = SubResource( 3 )
 
 [node name="PlayerDetection" parent="." instance=ExtResource( 2 )]
-visible = false
 
 [node name="CollisionShape2D" parent="PlayerDetection" index="0"]
 shape = SubResource( 63 )

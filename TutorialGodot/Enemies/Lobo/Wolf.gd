@@ -3,7 +3,7 @@ extends KinematicBody2D
 signal enemy_killed
 
 var Ferromante #= get_node("/root/World/YSort/Inimigos/Ferromante") 
-onready var player = get_node("/root/World/YSort/Player")
+onready var player = get_tree().current_scene.Player
 onready var Stats = $Stats
 
 
@@ -38,6 +38,8 @@ func _physics_process(delta):
 	if is_instance_valid(player):
 		direction = global_position.direction_to(player.global_position)
 		velocity = velocity.move_toward(direction * MAX_SPEED/1.5, ACCELERATION * delta)
+	else:
+		get_tree().current_scene.Player
 	
 	if(velocity.x != 0):
 		sprite.flip_h = velocity.x < 0

@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 var velocity = Vector2.ZERO
 
-var target = Vector2(271, 519)
+var target = Vector2(271, 450)
 onready var timer = $"../../../Timer"
 onready var player = $".."
 

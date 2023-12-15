@@ -3,8 +3,8 @@ extends KinematicBody2D
 const INITIAL_SPEED = 4500
 const ACCELERATION = 500
 
-onready var ferromante = get_node("/root/World/YSort/Inimigos/Ferromante") #$"../Ferromante" 
-onready var playerNode =  get_tree().get_root().get_node("World/YSort/Player")
+#onready var ferromante = get_node("/root/World/YSort/Inimigos/Ferromante") #$"../Ferromante" 
+onready var playerNode =  get_tree().current_scene.Player
 onready var timer = $LifeTime
 var direction = Vector2.ZERO
 var velocity = Vector2.ZERO
