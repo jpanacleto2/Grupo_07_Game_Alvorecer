@@ -32,6 +32,7 @@ extents = Vector2( 12, 5.5 )
 light_mode = 2
 
 [sub_resource type="CanvasItemMaterial" id=311]
+light_mode = 2
 
 [sub_resource type="TileSet" id=2]
 0/name = "dir_caverna.png 0"
@@ -59,6 +60,7 @@ light_mode = 2
 0/z_index = 0
 
 [sub_resource type="CanvasItemMaterial" id=312]
+light_mode = 2
 
 [sub_resource type="ConvexPolygonShape2D" id=314]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
