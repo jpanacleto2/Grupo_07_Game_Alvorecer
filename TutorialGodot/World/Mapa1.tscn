@@ -618,13 +618,14 @@ position = Vector2( 335, 82 )
 
 [node name="AnimatedSprite" parent="YSort/Inimigos/Os morcego/Bat2" index="0"]
 material = SubResource( 51 )
+frame = 4
 
 [node name="Bat3" parent="YSort/Inimigos/Os morcego" instance=ExtResource( 6 )]
 position = Vector2( -71, 81 )
 
 [node name="AnimatedSprite" parent="YSort/Inimigos/Os morcego/Bat3" index="0"]
 material = SubResource( 50 )
-frame = 2
+frame = 0
 
 [node name="Fungos" type="YSort" parent="YSort/Inimigos"]
 position = Vector2( -61, -16 )

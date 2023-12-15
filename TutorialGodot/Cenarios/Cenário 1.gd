@@ -51,5 +51,4 @@ func _on_BuracoCaverna_body_entered(body):
 # Assim que a animação acabar, ou seja, assim que a tela ficar toda preta, ele vai trocar de cena
 func _on_FadeAnimation_animation_finished(anim_name):
 	if anim_name == "fade_in":
-		print("OK")
 		get_tree().change_scene("res://Cenarios/Caverna.tscn")

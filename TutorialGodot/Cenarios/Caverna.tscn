@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Cenarios/Caverna.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -11,11 +11,15 @@
 [ext_resource path="res://CogumeloTela/GreyState.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Enemies/Bat.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Shadows/torchlight effect.png" type="Texture" id=11]
+[ext_resource path="res://Shadows/Escada Simples.png" type="Texture" id=12]
 
 [sub_resource type="CanvasItemMaterial" id=310]
 light_mode = 2
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=315]
+
+[sub_resource type="RectangleShape2D" id=316]
+extents = Vector2( 12, 5.5 )
 
 [sub_resource type="CanvasItemMaterial" id=311]
 
@@ -685,13 +689,14 @@ script = ExtResource( 1 )
 [node name="BackGround" type="Sprite" parent="."]
 show_behind_parent = true
 material = SubResource( 310 )
-position = Vector2( 155, 124 )
+position = Vector2( 133, 194 )
 scale = Vector2( 0.8125, 1.02047 )
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( -1155.73, -742.598, 3207.59, 2073.15 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 5 )]
+position = Vector2( 15, 595 )
 limit_left = -5000
 limit_top = -5000
 limit_right = 5000
@@ -701,7 +706,7 @@ limit_smoothed = true
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 160, 90 )
+position = Vector2( 15, 595 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -716,16 +721,27 @@ remote_path = NodePath("../../../Camera2D")
 texture = ExtResource( 11 )
 energy = 0.5
 
-[node name="Morcegos" type="YSort" parent="."]
+[node name="Morcegos" type="YSort" parent="YSort"]
 
-[node name="Bat" parent="Morcegos" instance=ExtResource( 10 )]
+[node name="Bat" parent="YSort/Morcegos" instance=ExtResource( 10 )]
 position = Vector2( 180, 43 )
 
-[node name="Bat2" parent="Morcegos" instance=ExtResource( 10 )]
+[node name="Bat2" parent="YSort/Morcegos" instance=ExtResource( 10 )]
 position = Vector2( 260, 81 )
 
-[node name="Bat3" parent="Morcegos" instance=ExtResource( 10 )]
+[node name="Bat3" parent="YSort/Morcegos" instance=ExtResource( 10 )]
 position = Vector2( 36, 94 )
+
+[node name="Passagem_Boss" type="Area2D" parent="YSort"]
+position = Vector2( 16, 626 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Passagem_Boss"]
+position = Vector2( 0, 6.5 )
+shape = SubResource( 316 )
+
+[node name="Sprite" type="Sprite" parent="YSort/Passagem_Boss"]
+scale = Vector2( 0.8125, 0.78125 )
+texture = ExtResource( 12 )
 
 [node name="ChãoCaverna" type="TileMap" parent="."]
 show_behind_parent = true
@@ -772,6 +788,8 @@ position = Vector2( 160, 91 )
 
 [node name="CogumeloTimer" type="Timer" parent="."]
 
+[connection signal="animation_finished" from="YSort/Player/CanvasLayer/FadeAnimation" to="." method="_on_FadeAnimation_animation_finished"]
+[connection signal="body_entered" from="YSort/Passagem_Boss" to="." method="_on_Passagem_Boss_body_entered"]
 [connection signal="timeout" from="CogumeloTimer" to="." method="_on_CogumeloTimer_timeout"]
 
 [editable path="Camera2D"]
