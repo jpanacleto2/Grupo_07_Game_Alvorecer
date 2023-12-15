@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 signal comeu_cogumelo
-
+signal area_placa
 
 const PlayerHurtSound = preload("res://Player/PlayerHurtSound.tscn")
 const DeathScreen = preload("res://CogumeloTela/TelaMorte.tscn")
@@ -102,7 +102,6 @@ func _physics_process(delta):
 		var canvas = $"../../CanvasLayer"
 		canvas.add_child(inventario)
 		inv_aberto = true
-	
 
 func move_state(delta): 
 	
@@ -205,3 +204,19 @@ func _on_FadeAnimation_animation_finished(anim_name):
 		# ao início
 		global_position = Vector2(0, 0)
 		fade_animation.play("fade_out")
+
+func _on_PlacasArea_area_entered(area):
+	var text_boxes = get_tree().get_nodes_in_group("text_box")
+	
+	print(text_boxes)
+	
+	for text_box in text_boxes:
+		text_box.visible = true
+
+func _on_PlacasArea_area_exited(area):
+	var text_boxes = get_tree().get_nodes_in_group("text_box")
+	
+	print(text_boxes)
+	
+	for text_box in text_boxes:
+		text_box.visible = false

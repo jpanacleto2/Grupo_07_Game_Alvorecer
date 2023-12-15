@@ -24,13 +24,14 @@ onready var timer = $CogumeloTimer
 func _ready():
 	fade_animation.play("fade_out")
 	Player.connect("comeu_cogumelo", self, "sumirParedes")
-	
+
 # Função que tira a colisão da parede falsa
 func sumirParedes():
 	paredeFalsa.collision_layer = 0
 	paredeFalsa.collision_mask = 0
 	paredeFalsa.visible = false
 	timer.start(1)
+	
 	
 func _process(delta):
 	if !tocando:
@@ -64,3 +65,4 @@ func _on_Passagem_Boss_body_entered(body):
 func _on_FadeAnimation_animation_finished(anim_name):
 	if anim_name == "fade_in":
 		get_tree().change_scene("res://Cenarios/Sala Boss.tscn")
+

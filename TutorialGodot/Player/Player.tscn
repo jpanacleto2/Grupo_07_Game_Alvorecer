@@ -1248,6 +1248,12 @@ frame = 1
 rotation = -1.5708
 shape = SubResource( 1 )
 
+[node name="PlacasArea" type="Area2D" parent="." groups=["placas"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlacasArea"]
+rotation = -1.5708
+shape = SubResource( 1 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/AttacRight = SubResource( 25 )
 anims/AttackDown = SubResource( 26 )
@@ -1342,6 +1348,8 @@ position = Vector2( 0, -9 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/walls_listener"]
 shape = SubResource( 81 )
 
+[connection signal="area_entered" from="PlacasArea" to="." method="_on_PlacasArea_area_entered"]
+[connection signal="area_exited" from="PlacasArea" to="." method="_on_PlacasArea_area_exited"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="invincibility_ended" from="HurtBox" to="." method="_on_HurtBox_invincibility_ended"]
 [connection signal="invincibility_started" from="HurtBox" to="." method="_on_HurtBox_invincibility_started"]
