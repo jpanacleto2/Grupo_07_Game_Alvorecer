@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 signal comeu_cogumelo
 
+
 const PlayerHurtSound = preload("res://Player/PlayerHurtSound.tscn")
 const DeathScreen = preload("res://CogumeloTela/TelaMorte.tscn")
 var Morte = false
@@ -32,8 +33,6 @@ var inv_aberto = false
 var greyII = false
 var armadura = 0
 
-
-
 #variável de acesso para animação de correr para os lados
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
@@ -41,11 +40,13 @@ onready var swordHitbox = $HitBoxPivot/SwordHitbox
 onready var animationState = animationTree.get("parameters/playback")
 onready var hurtbox = $HurtBox
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
+onready var fade_animation = $CanvasLayer/FadeAnimation
+
 const inv = preload("res://Inventario/Inventario.tscn")
 
 func _ready():
 	#randomize()
-	#print (get_tree().current_scene)
+	print (get_tree().current_scene)
 	get_tree().current_scene.Player = self
 	stats.connect("no_health", self, "dead")
 	animationTree.active = true
@@ -191,3 +192,16 @@ func _on_HurtBox_invincibility_started():
 
 func _on_HurtBox_invincibility_ended():
 	blinkAnimationPlayer.play("stop")
+
+# Função que detecta se o jogador está dentro da parede
+func _on_walls_listener_body_entered(body):
+	if body.is_in_group("paredes"):
+		fade_animation.play("fade_in")
+
+func _on_FadeAnimation_animation_finished(anim_name):
+	if anim_name == "fade_in":
+		
+		# Se o jogador se prender dentro da parede, ele é penalizado retornando
+		# ao início
+		global_position = Vector2(0, 0)
+		fade_animation.play("fade_out")

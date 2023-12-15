@@ -16,24 +16,16 @@ onready var Ferromante
 onready var Player
 onready var Grey
 
-
 func _process(delta):
 	if !tocando:
 		musica = MusicaAmbiente.instance()
 		add_child(musica)
 		tocando = true
 
-
-			
-
 func stopMusic():
 	musica.queue_free()
 	musica = MusicaMorte.instance()
 	add_child(musica)
-
-
-
-
 
 func _ready():
 	fade_animation.play("fade_out")

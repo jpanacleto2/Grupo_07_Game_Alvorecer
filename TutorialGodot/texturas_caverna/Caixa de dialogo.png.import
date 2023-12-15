@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SpriteBuraco.png-39c867828fa5ce7cfd2c1473441e3e32.stex"
+path="res://.import/Caixa de dialogo.png-761af8d3fd3c208e0eae43c2eb86d715.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://World/SpriteBuraco.png"
-dest_files=[ "res://.import/SpriteBuraco.png-39c867828fa5ce7cfd2c1473441e3e32.stex" ]
+source_file="res://texturas_caverna/Caixa de dialogo.png"
+dest_files=[ "res://.import/Caixa de dialogo.png-761af8d3fd3c208e0eae43c2eb86d715.stex" ]
 
 [params]
 

@@ -1,0 +1,86 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Menu/04B_30__.TTF" type="DynamicFontData" id=1]
+[ext_resource path="res://Menu/Alvorecer.jpeg" type="Texture" id=2]
+[ext_resource path="res://Menu/Menu.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="Theme" id=2]
+/colors/Button = Color( 0, 0, 0, 1 )
+/styles/Vox = SubResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.831373, 0.172549, 0.172549, 1 )
+
+[sub_resource type="Theme" id=3]
+/styles/StartBtn = SubResource( 5 )
+Button/colors/font_color = Color( 0.611765, 0.568627, 0.568627, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_focus = Color( 0.94, 0.94, 0.94, 1 )
+Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = SubResource( 6 )
+Button/styles/normal = null
+Button/styles/pressed = null
+
+[sub_resource type="DynamicFont" id=1]
+size = 15
+outline_color = Color( 0.0313726, 0.0313726, 0.0313726, 1 )
+font_data = ExtResource( 1 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 2 )
+script = ExtResource( 3 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 1024.0
+rect_scale = Vector2( 0.312, 0.176 )
+texture = ExtResource( 2 )
+
+[node name="StartBtn" type="Button" parent="."]
+margin_left = 106.0
+margin_top = 73.0
+margin_right = 218.0
+margin_bottom = 99.0
+theme = SubResource( 3 )
+custom_colors/font_color_focus = Color( 0.0392157, 0.0431373, 0.0392157, 1 )
+custom_colors/font_color = Color( 0.0509804, 0.054902, 0.0509804, 1 )
+custom_colors/font_color_hover = Color( 0.372549, 0.0196078, 0.427451, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Start"
+flat = true
+
+[node name="StartBtn2" type="Button" parent="."]
+anchor_left = -0.32
+anchor_top = 0.028
+anchor_right = -0.32
+anchor_bottom = 0.028
+margin_left = 209.4
+margin_top = 95.96
+margin_right = 321.4
+margin_bottom = 121.96
+theme = SubResource( 3 )
+custom_colors/font_color_focus = Color( 0.0392157, 0.0431373, 0.0392157, 1 )
+custom_colors/font_color = Color( 0.0509804, 0.054902, 0.0509804, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.0235294, 0.4, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Exit"
+flat = true
+
+[connection signal="button_down" from="StartBtn" to="." method="_on_StartBtn_button_down"]
+[connection signal="button_down" from="StartBtn2" to="." method="_on_StartBtn2_button_down"]

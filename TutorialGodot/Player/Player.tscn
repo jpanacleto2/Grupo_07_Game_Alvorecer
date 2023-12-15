@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=2]
+[gd_scene load_steps=84 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
@@ -1226,6 +1226,9 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
 }
 
+[sub_resource type="RectangleShape2D" id=81]
+extents = Vector2( 1, 1 )
+
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 0, -9 )
 collision_layer = 2
@@ -1242,7 +1245,6 @@ hframes = 61
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 rotation = -1.5708
 shape = SubResource( 1 )
 
@@ -1322,6 +1324,7 @@ max_health = 6
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Fade" type="ColorRect" parent="CanvasLayer"]
+visible = false
 margin_left = -374.0
 margin_top = -233.0
 margin_right = 377.0
@@ -1333,9 +1336,17 @@ anims/RESET = SubResource( 78 )
 anims/fade_in = SubResource( 79 )
 anims/fade_out = SubResource( 80 )
 
+[node name="walls_listener" type="Area2D" parent="CanvasLayer"]
+position = Vector2( 0, -9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/walls_listener"]
+shape = SubResource( 81 )
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="invincibility_ended" from="HurtBox" to="." method="_on_HurtBox_invincibility_ended"]
 [connection signal="invincibility_started" from="HurtBox" to="." method="_on_HurtBox_invincibility_started"]
+[connection signal="animation_finished" from="CanvasLayer/FadeAnimation" to="." method="_on_FadeAnimation_animation_finished"]
+[connection signal="body_entered" from="CanvasLayer/walls_listener" to="." method="_on_walls_listener_body_entered"]
 
 [editable path="HitBoxPivot/SwordHitbox"]
 [editable path="HurtBox"]

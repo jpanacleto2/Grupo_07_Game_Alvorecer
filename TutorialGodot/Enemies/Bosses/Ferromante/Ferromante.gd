@@ -271,6 +271,7 @@ func anim_finish_dodge():
 func anim_finish_morte():
 	queue_free()
 
+
 var loop = 0
 func intro2():
 	if loop > 1:

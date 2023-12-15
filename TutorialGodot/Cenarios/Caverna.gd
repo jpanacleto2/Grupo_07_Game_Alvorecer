@@ -15,10 +15,10 @@ var Check = Vector2(0,0)
 
 onready var Ferromante
 onready var Grey
-onready var Player = $YSort/Player
+onready var Player
 
 onready var fade_animation = $YSort/Player/CanvasLayer/FadeAnimation
-onready var paredeFalsa = $ParedeFalsa
+onready var paredeFalsa = $YSort/ParedeFalsa
 onready var timer = $CogumeloTimer
 
 func _ready():
@@ -30,7 +30,7 @@ func sumirParedes():
 	paredeFalsa.collision_layer = 0
 	paredeFalsa.collision_mask = 0
 	paredeFalsa.visible = false
-	timer.start(2)
+	timer.start(1)
 	
 func _process(delta):
 	if !tocando:

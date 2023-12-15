@@ -24,9 +24,6 @@ func _process(delta):
 		#add_child(musica)
 		tocando = true
 
-
-			
-
 func stopMusic():
 	musica.queue_free()
 	musica = MusicaMorte.instance()

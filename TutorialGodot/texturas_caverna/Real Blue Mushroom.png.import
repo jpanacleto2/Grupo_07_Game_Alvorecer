@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SpriteBuraco.png-39c867828fa5ce7cfd2c1473441e3e32.stex"
+path="res://.import/Real Blue Mushroom.png-1ac0576bfa39b3c766fd5eb089d0a543.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://World/SpriteBuraco.png"
-dest_files=[ "res://.import/SpriteBuraco.png-39c867828fa5ce7cfd2c1473441e3e32.stex" ]
+source_file="res://texturas_caverna/Real Blue Mushroom.png"
+dest_files=[ "res://.import/Real Blue Mushroom.png-1ac0576bfa39b3c766fd5eb089d0a543.stex" ]
 
 [params]
 
