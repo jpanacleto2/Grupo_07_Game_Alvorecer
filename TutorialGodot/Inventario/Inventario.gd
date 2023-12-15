@@ -26,13 +26,17 @@ func _ready():
 	#yield(get_tree().create_timer(0.35), "timeout")
 	
 func _process(delta):
-	if Input.is_action_just_pressed("roll"):
+	##if Input.is_action_just_pressed("roll"):
+		##var f = File.new()
+		##f.open("res://Json/inv_data_file.json", File.WRITE)
+		##f.store_string(JSON.print(PlayerData.inv_data, "  "))
+		##f.close()
+	
+	if Input.is_action_just_pressed("Abrir_Inv"):
 		var f = File.new()
 		f.open("res://Json/inv_data_file.json", File.WRITE)
 		f.store_string(JSON.print(PlayerData.inv_data, "  "))
 		f.close()
-	
-	if Input.is_action_just_pressed("Abrir_Inv"):
 		queue_free()
 		
 	if Input.is_action_just_pressed("Select") && PlayerData.inv_data["Inv" + str(posSelect)]["Item"] != null:

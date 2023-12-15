@@ -5,6 +5,7 @@ const MusicaMorte = preload("res://Music and Sounds/Musica/Morte/StairWayToHeave
 var tocando = false
 var musica
 
+var boss = false
 var numWolf = 0
 var wolfs = Array()
 
@@ -54,15 +55,16 @@ func _on_CogumeloTimer_timeout():
 
 func _on_Passagem_Boss_body_entered(body):
 	if body == Player:
+		boss = true
 		var STOP
 		yield(get_tree().create_timer(0.2), "timeout")
 		Player.velocity = Vector2.ZERO
 		Player.state = STOP
-		#fade_animation.play("fade_in")
+		fade_animation.play("fade_in")
 		get_tree().change_scene("res://Cenarios/Sala Boss.tscn")
 
 
 func _on_FadeAnimation_animation_finished(anim_name):
-	if anim_name == "fade_in":
+	if anim_name == "fade_in" and boss:
 		get_tree().change_scene("res://Cenarios/Sala Boss.tscn")
 

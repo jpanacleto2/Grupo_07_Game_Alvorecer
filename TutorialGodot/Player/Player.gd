@@ -51,6 +51,7 @@ func _ready():
 	stats.connect("no_health", self, "dead")
 	animationTree.active = true
 	swordHitbox.knockback_vector = roll_vector
+	fade_animation.play("fade_out")
 	#yield(get_tree().create_timer(1), "timeout")
 	respawn()
 	
@@ -192,19 +193,6 @@ func _on_HurtBox_invincibility_started():
 func _on_HurtBox_invincibility_ended():
 	blinkAnimationPlayer.play("stop")
 
-# Função que detecta se o jogador está dentro da parede
-func _on_walls_listener_body_entered(body):
-	if body.is_in_group("paredes"):
-		fade_animation.play("fade_in")
-
-func _on_FadeAnimation_animation_finished(anim_name):
-	if anim_name == "fade_in":
-		
-		# Se o jogador se prender dentro da parede, ele é penalizado retornando
-		# ao início
-		global_position = Vector2(0, 0)
-		fade_animation.play("fade_out")
-
 func _on_PlacasArea_area_entered(area):
 	var text_boxes = get_tree().get_nodes_in_group("text_box")
 	
@@ -220,3 +208,17 @@ func _on_PlacasArea_area_exited(area):
 	
 	for text_box in text_boxes:
 		text_box.visible = false
+
+# Detecta se o jogador está dentro da parede
+
+func _on_walls_listener_body_entered(body):
+	print(body)
+	if body.is_in_group("paredes"):
+		fade_animation.play("fade_in")
+
+
+func _on_FadeAnimation_animation_finished(anim_name):
+	if anim_name == "fade_in":
+		
+		global_position = Vector2(160, 90)
+		fade_animation.play("fade_out")

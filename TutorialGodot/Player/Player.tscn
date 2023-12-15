@@ -1330,7 +1330,6 @@ max_health = 6
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Fade" type="ColorRect" parent="CanvasLayer"]
-visible = false
 margin_left = -374.0
 margin_top = -233.0
 margin_right = 377.0
@@ -1342,10 +1341,12 @@ anims/RESET = SubResource( 78 )
 anims/fade_in = SubResource( 79 )
 anims/fade_out = SubResource( 80 )
 
-[node name="walls_listener" type="Area2D" parent="CanvasLayer"]
-position = Vector2( 0, -9 )
+[node name="walls_listener" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/walls_listener"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls_listener"]
+position = Vector2( 0, 1 )
 shape = SubResource( 81 )
 
 [connection signal="area_entered" from="PlacasArea" to="." method="_on_PlacasArea_area_entered"]
@@ -1354,7 +1355,7 @@ shape = SubResource( 81 )
 [connection signal="invincibility_ended" from="HurtBox" to="." method="_on_HurtBox_invincibility_ended"]
 [connection signal="invincibility_started" from="HurtBox" to="." method="_on_HurtBox_invincibility_started"]
 [connection signal="animation_finished" from="CanvasLayer/FadeAnimation" to="." method="_on_FadeAnimation_animation_finished"]
-[connection signal="body_entered" from="CanvasLayer/walls_listener" to="." method="_on_walls_listener_body_entered"]
+[connection signal="body_entered" from="walls_listener" to="." method="_on_walls_listener_body_entered"]
 
 [editable path="HitBoxPivot/SwordHitbox"]
 [editable path="HurtBox"]
